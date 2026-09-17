@@ -8,26 +8,27 @@ document
 
     });
 
-// Make the "อื่น ๆ โปรดระบุ" field a single-select stakeholder option.
+// Make "อื่น ๆ โปรดระบุ" look like a single radio option with an inline text field.
 const otherStakeholder = document.getElementById("otherStakeholder");
 const otherStakeholderGroup = otherStakeholder?.closest(".form-group");
 
 if (otherStakeholder && otherStakeholderGroup) {
-    const otherOption = document.createElement("label");
+    const otherLabel = document.createElement("label");
     const otherRadio = document.createElement("input");
 
-    otherOption.className = "option-item other-option";
+    otherLabel.className = "option-item other-option";
     otherRadio.type = "radio";
     otherRadio.name = "stakeholderType";
     otherRadio.value = "Other";
     otherRadio.id = "otherStakeholderOption";
     otherRadio.setAttribute("aria-controls", "otherStakeholder");
 
-    otherOption.append(otherRadio, document.createTextNode("อื่น ๆ โปรดระบุ"));
-    otherStakeholderGroup.parentNode.insertBefore(otherOption, otherStakeholderGroup);
-
+    otherStakeholder.placeholder = "Other";
     otherStakeholder.disabled = true;
     otherStakeholder.setAttribute("aria-disabled", "true");
+
+    otherLabel.append(otherRadio, otherStakeholder);
+    otherStakeholderGroup.replaceWith(otherLabel);
 
     const stakeholderRadios = document.querySelectorAll('input[name="stakeholderType"]');
 
@@ -39,7 +40,9 @@ if (otherStakeholder && otherStakeholderGroup) {
             otherStakeholder.required = isOtherSelected;
             otherStakeholder.setAttribute("aria-disabled", String(!isOtherSelected));
 
-            if (!isOtherSelected) {
+            if (isOtherSelected) {
+                otherStakeholder.focus();
+            } else {
                 otherStakeholder.value = "";
             }
         });
