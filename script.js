@@ -1,47 +1,45 @@
-document
-    .getElementById("surveyForm")
-    .addEventListener("submit", function(e){
-
-        e.preventDefault();
-
-        alert("ส่งแบบสอบถามเรียบร้อย");
-
-    });
-
 const surveyForm = document.getElementById("surveyForm");
-
-const stakeholderRadios = document.querySelectorAll(
-    'input[name="stakeholderType"]'
-);
-
+const toggleInputs = document.querySelectorAll('input[type="radio"], input[type="checkbox"]');
 const otherRadio = document.getElementById("otherStakeholderOption");
 const otherStakeholder = document.getElementById("otherStakeholder");
 
-function updateOtherStakeholderField() {
-    const isOtherSelected = otherRadio.checked;
+function syncSelectedState() {
+    toggleInputs.forEach((input) => {
+        const container = input.closest(".option-item, .check-item");
+        if (container) {
+            container.classList.toggle("is-selected", input.checked);
+        }
+    });
+}
 
+function updateOtherFieldState() {
+    if (!otherRadio || !otherStakeholder) return;
+
+    const isOtherSelected = otherRadio.checked;
     otherStakeholder.disabled = !isOtherSelected;
     otherStakeholder.required = isOtherSelected;
-    otherStakeholder.setAttribute(
-        "aria-disabled",
-        String(!isOtherSelected)
-    );
+    otherStakeholder.setAttribute("aria-disabled", String(!isOtherSelected));
 
-    if (isOtherSelected) {
-        otherStakeholder.focus();
-    } else {
+    if (!isOtherSelected) {
         otherStakeholder.value = "";
     }
 }
 
-stakeholderRadios.forEach((radio) => {
-    radio.addEventListener("change", updateOtherStakeholderField);
+toggleInputs.forEach((input) => {
+    input.addEventListener("change", () => {
+        syncSelectedState();
+        updateOtherFieldState();
+    });
 });
 
-surveyForm.addEventListener("submit", function (event) {
-    event.preventDefault();
+if (surveyForm) {
+    surveyForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        syncSelectedState();
+        updateOtherFieldState();
+        alert("ส่งแบบสอบถามเรียบร้อย");
+    });
+}
 
-    updateOtherStakeholderField();
-
-    alert("ส่งแบบสอบถามเรียบร้อย");
-});
+syncSelectedState();
+updateOtherFieldState();
