@@ -1,15 +1,20 @@
 :root {
-    --primary: #1f6b45;
-    --primary-dark: #12452d;
-    --secondary: #78b84a;
-    --accent: #d9f2c6;
-    --page-background: #b8e9b1;
+    --brand-navy: #123b5d;
+    --brand-navy-dark: #082a43;
+    --brand-blue: #1d5d8f;
+    --brand-blue-soft: #eaf1f8;
+
+    --sustain-green: #1f6b45;
+    --sustain-green-deep: #12452d;
+    --sustain-green-soft: #eef6f0;
+
+    --page-background: #edf2f5;
     --surface: #ffffff;
-    --surface-soft: #f6fcf3;
-    --text: #24352a;
-    --muted: #587060;
-    --border: #d5e7d0;
-    --shadow: 0 12px 30px rgba(31, 107, 69, 0.12);
+    --surface-soft: #f6fafb;
+    --text: #1e2b35;
+    --muted: #60717d;
+    --border: #d8e1e7;
+    --shadow: 0 12px 30px rgba(18, 59, 93, 0.1);
 }
 
 * {
@@ -39,10 +44,10 @@ body {
     isolation: isolate;
     color: #fff;
     background:
-        linear-gradient(118deg, rgba(10, 63, 39, 0.96), rgba(39, 119, 71, 0.9)),
+        linear-gradient(110deg, rgba(8, 42, 67, 0.96) 0%, rgba(18, 59, 93, 0.88) 45%, rgba(19, 91, 58, 0.58) 100%),
         url("https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=1800&q=85") center / cover;
     padding: clamp(38px, 6vw, 76px) 24px clamp(44px, 7vw, 88px);
-    box-shadow: 0 8px 24px rgba(20, 75, 45, 0.22);
+    box-shadow: 0 10px 26px rgba(8, 42, 67, 0.2);
 }
 
 .hero::before,
@@ -51,7 +56,7 @@ body {
     z-index: -1;
     content: "";
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .hero::before {
@@ -59,7 +64,7 @@ body {
     height: 280px;
     right: -80px;
     top: -130px;
-    box-shadow: -90px 170px 0 20px rgba(185, 233, 177, 0.08);
+    box-shadow: -90px 170px 0 18px rgba(31, 107, 69, 0.10);
 }
 
 .hero::after {
@@ -67,30 +72,38 @@ body {
     height: 170px;
     left: -70px;
     bottom: -110px;
-    background: rgba(185, 233, 177, 0.08);
+    background: rgba(31, 107, 69, 0.09);
 }
 
 .hero-content {
     position: relative;
     max-width: 1100px;
     margin: 0 auto;
-    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 32px;
 }
 
 .logo {
     display: block;
-    width: min(280px, 70vw);
+    width: min(220px, 46vw);
     height: auto;
-    margin-bottom: 24px;
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.15));
+}
+
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .hero h1 {
     max-width: 900px;
-    font-size: clamp(1.3rem, 3.2vw, 1.70rem);
+    font-size: clamp(1.35rem, 3.1vw, 1.8rem);
     font-weight: 700;
-    line-height: 1.4;
+    line-height: 1.38;
     letter-spacing: 0.01em;
-    margin-bottom: 8px;
+    color: #fff;
 }
 
 .container {
@@ -104,22 +117,22 @@ body {
     position: relative;
     background: var(--surface);
     padding: clamp(22px, 3vw, 34px);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    border-left: 5px solid var(--secondary);
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--brand-navy);
     border-radius: 16px;
     margin-bottom: 24px;
     box-shadow: var(--shadow);
 }
 
 .card h2 {
-    color: var(--primary-dark);
+    color: var(--brand-navy-dark);
     font-size: clamp(1.25rem, 2vw, 1.55rem);
     line-height: 1.4;
     margin-bottom: 16px;
 }
 
 .card h3 {
-    color: var(--primary);
+    color: var(--sustain-green-deep);
     font-size: clamp(1rem, 1.7vw, 1.15rem);
     font-weight: 600;
     line-height: 1.6;
@@ -162,8 +175,8 @@ input[type="date"]:focus,
 textarea:focus {
     outline: none;
     background: #fff;
-    border-color: var(--secondary);
-    box-shadow: 0 0 0 4px rgba(120, 184, 74, 0.2);
+    border-color: var(--brand-blue);
+    box-shadow: 0 0 0 4px rgba(29, 93, 143, 0.14);
 }
 
 textarea {
@@ -172,18 +185,39 @@ textarea {
 }
 
 .option-item,
-.card > label:not(.option-item) {
-    padding: 9px 12px;
-    border-radius: 8px;
-    transition: background 0.2s ease;
+.check-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    background: var(--surface);
+    color: var(--text);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 12px;
 }
 
 .option-item:hover,
-.card > label:not(.option-item):hover {
-    background: var(--surface-soft);
+.check-item:hover {
+    background: var(--brand-blue-soft);
+    border-color: rgba(18, 59, 93, 0.10);
 }
 
-/* The other option matches the reference: radio button followed by an inline field. */
+.option-item.is-selected,
+.check-item.is-selected {
+    background: var(--brand-blue-soft);
+    border-color: rgba(18, 59, 93, 0.18);
+    border-left: 4px solid var(--sustain-green);
+    box-shadow: inset 0 0 0 1px rgba(31, 107, 69, 0.08);
+}
+
+.consent-card .check-item {
+    margin-bottom: 0;
+}
+
 .other-option {
     display: flex;
     align-items: center;
@@ -196,36 +230,37 @@ textarea {
 }
 
 .other-option input[type="text"] {
-    width: min(400px, 100%);
+    width: min(420px, 100%);
+    margin-left: 6px;
     background: #ffffff;
-    border: 0;
-    border-radius: 6px;
-    padding: 9px 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    padding: 10px 14px;
 }
 
 .other-option input[type="text"]:disabled {
-    background: #eef2ee;
-    color: #6b756d;
+    background: var(--surface-soft);
+    color: var(--muted);
     cursor: not-allowed;
     opacity: 0.8;
 }
 
-.other-option:has(input[type="radio"]:checked) {
-    background: var(--surface-soft);
+.option-item input[type="radio"],
+.check-item input[type="checkbox"] {
+    width: 1.1em;
+    height: 1.1em;
+    accent-color: var(--brand-navy);
+    flex: 0 0 auto;
 }
 
-.other-option input[type="radio"]:checked + input[type="text"] {
-    background: #ffffff;
-    border: 1px solid var(--secondary);
+.check-item input[type="checkbox"] {
+    accent-color: var(--sustain-green);
 }
 
-input[type="radio"],
-input[type="checkbox"] {
-    width: 1.05em;
-    height: 1.05em;
-    margin-right: 9px;
-    accent-color: var(--primary);
-    vertical-align: -0.12em;
+.option-item span,
+.check-item span {
+    flex: 1;
+    line-height: 1.55;
 }
 
 .submit-container {
@@ -236,29 +271,30 @@ input[type="checkbox"] {
 .btn-submit {
     min-width: 190px;
     color: #fff;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    background: linear-gradient(135deg, var(--brand-navy), var(--brand-navy-dark));
     border: none;
     padding: 14px 30px;
     border-radius: 999px;
     font: inherit;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 8px 18px rgba(31, 107, 69, 0.25);
+    box-shadow: 0 10px 20px rgba(18, 59, 93, 0.22);
     transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .btn-submit:hover,
 .btn-submit:focus-visible {
-    background: linear-gradient(135deg, #2c8958, var(--primary));
+    background: linear-gradient(135deg, var(--brand-blue), var(--brand-navy));
     transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(31, 107, 69, 0.3);
+    box-shadow: 0 12px 24px rgba(18, 59, 93, 0.28);
 }
 
 body::after {
     display: block;
     content: "ISO 14001:2026  •  Environmental Stakeholder Survey";
-    color: rgba(255, 255, 255, 0.9);
-    background: var(--primary-dark);
+    color: rgba(255, 255, 255, 0.95);
+    background: var(--brand-navy-dark);
+    border-top: 4px solid var(--sustain-green);
     padding: 22px 20px;
     font-size: 0.9rem;
     font-weight: 600;
@@ -272,11 +308,13 @@ body::after {
     }
 
     .hero-content {
-        text-align: center;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
     }
 
     .logo {
-        margin: 0 auto 20px;
+        width: min(180px, 52vw);
     }
 
     .hero h1 {
