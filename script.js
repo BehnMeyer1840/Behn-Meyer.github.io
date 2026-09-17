@@ -1,9 +1,9 @@
 document
-.getElementById("surveyForm")
-.addEventListener("submit", function(e){
+    .getElementById("surveyForm")
+    .addEventListener("submit", function(e){
 
-    e.preventDefault();
+        e.preventDefault();
 
-    alert("ส่งแบบสอบถามเรียบร้อย");
+        alert("ส่งแบบสอบถามเรียบร้อย");
 
-});
+    });
