@@ -183,6 +183,31 @@ textarea {
     background: var(--surface-soft);
 }
 
+/* The other option matches the reference: radio button followed by an inline field. */
+.other-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.other-option input[type="radio"] {
+    flex: 0 0 auto;
+    margin-right: 0;
+}
+
+.other-option input[type="text"] {
+    width: min(400px, 100%);
+    background: #ffffff;
+    border: 0;
+    border-radius: 6px;
+    padding: 9px 15px;
+}
+
+.other-option input[type="text"]:disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+}
+
 input[type="radio"],
 input[type="checkbox"] {
     width: 1.05em;
@@ -218,7 +243,6 @@ input[type="checkbox"] {
     box-shadow: 0 12px 24px rgba(31, 107, 69, 0.3);
 }
 
-/* Footer is generated without changing the survey copy in index.html. */
 body::after {
     display: block;
     content: "ISO 14001:2026  •  Environmental Stakeholder Survey";
@@ -250,11 +274,18 @@ body::after {
 
     .card {
         padding: 21px 18px;
-        border-left-width: 4px;
     }
 
     .container {
         padding: 28px 14px;
+    }
+
+    .other-option {
+        align-items: flex-start;
+    }
+
+    .other-option input[type="text"] {
+        min-width: 0;
     }
 }
 
