@@ -1,3 +1,6 @@
+const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbzkM8QRes30RXHRh2PJAUyYFjIm8grYFotBcUk1_jIFauBd6TqKCV-PM9hMPlsVGfyU/exec";
+
 const surveyForm = document.getElementById("surveyForm");
 const toggleInputs = document.querySelectorAll('input[type="radio"], input[type="checkbox"]');
 const otherRadio = document.getElementById("otherStakeholderOption");
