@@ -137,18 +137,22 @@
                     หน่วยงานกำกับดูแล / หน่วยงานราชการ / องค์กรปกครองส่วนท้องถิ่น
                 </label>
 
-                <div class="form-group">
-
-                    <label for="otherStakeholder">
-                        อื่น ๆ โปรดระบุ
-                    </label>
+                <label class="option-item other-option">
+                    <input
+                        type="radio"
+                        name="stakeholderType"
+                        value="Other"
+                        id="otherStakeholderOption"
+                        required>
 
                     <input
                         type="text"
                         id="otherStakeholder"
-                        name="otherStakeholder">
-
-                </div>
+                        name="otherStakeholder"
+                        placeholder="Other"
+                        aria-label="ระบุประเภทผู้มีส่วนได้ส่วนเสียอื่น ๆ"
+                        disabled>
+                </label>
 
             </section>
 
