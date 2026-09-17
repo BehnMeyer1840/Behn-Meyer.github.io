@@ -112,6 +112,13 @@ input[type=checkbox]{
     background:#3D7BFF;
 }
 
+.logo{
+    width:200px;
+    height:auto;
+    margin-bottom:20px;
+}
+
+
 @media(max-width:768px){
 
     .hero h1{
