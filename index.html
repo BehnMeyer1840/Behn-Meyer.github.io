@@ -1,219 +1,335 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แบบสอบถาม ISO 14001:2026</title>
 
-    <style>
-        body {
-            font-family: Tahoma, Arial, sans-serif;
-            max-width: 1000px;
-            margin: auto;
-            padding: 20px;
-            background: #f5f5f5;
-        }
+    <title>
+        ISO 14001:2026 Environmental Stakeholder Survey
+    </title>
 
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,.1);
-        }
-
-        h1, h2 {
-            color: #0f4c81;
-        }
-
-        .section {
-            margin-top: 30px;
-        }
-
-        label {
-            display: block;
-            margin: 8px 0;
-        }
-
-        input[type="text"],
-        input[type="date"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        textarea {
-            min-height: 120px;
-        }
-
-        .info-box {
-            background: #eef6ff;
-            padding: 15px;
-            border-left: 5px solid #0f4c81;
-            margin-bottom: 20px;
-        }
-
-        button {
-            background: #0f4c81;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        button:hover {
-            background: #083457;
-        }
-    </style>
+    style.css
 </head>
 
 <body>
 
-<div class="container">
+    <!-- Header -->
+    <header class="hero">
 
-    <h1>แบบสอบถามความต้องการและความคาดหวังของผู้มีส่วนได้ส่วนเสีย</h1>
-    <h2>ระบบการจัดการสิ่งแวดล้อม ISO 14001:2026</h2>
+        <div class="hero-content">
 
-    <div class="info-box">
-        <strong>วัตถุประสงค์</strong><br>
-        เพื่อรวบรวมความต้องการ ความคาดหวัง และข้อเสนอแนะของผู้มีส่วนได้ส่วนเสีย
-        สำหรับนำไปใช้ในการปรับปรุงและพัฒนาระบบการจัดการสิ่งแวดล้อมขององค์กร
-    </div>
+            <img
+                src="assets/logo.png"
+                alt="Behn Meyer Logo"
+                class="logo">
 
-    <form>
+            <h1>
+                Environmental Stakeholder nt System
+            </p>
 
-        <div class="section">
-            <h2>ข้อมูลทั่วไป</h2>
-
-            <label>
-                ชื่อองค์กร / หน่วยงาน
-                <input type="text" name="organization">
-            </label>
-
-            <label>
-                ชื่อผู้ติดต่อ (ไม่บังคับ)
-                <input type="text" name="contact">
-            </label>
-
-            <label>
-                วันที่ตอบแบบสอบถาม
-                <input type="date" name="survey_date">
-            </label>
         </div>
 
-        <div class="section">
-            <h2>ส่วนที่ 1 ข้อมูลผู้มีส่วนได้ส่วนเสีย</h2>
+    </header>
 
-            <label>
-                <input type="radio" name="stakeholder" value="Customer">
-                ลูกค้า / ผู้รับบริการ
-            </label>
+    <!-- Main Container -->
+    <main class="container">
 
-            <label>
-                <input type="radio" name="stakeholder" value="Supplier">
-                ผู้ส่งมอบ / ผู้รับเหมา / ผู้ให้บริการภายนอก
-            </label>
+        <!-- Introduction -->
+        <section class="card">
 
-            <label>
-                <input type="radio" name="stakeholder" value="Government">
-                หน่วยงานกำกับดูแล / หน่วยงานราชการ / องค์กรปกครองส่วนท้องถิ่น
-            </label>
+            <h2>วัตถุประสงค์</h2>
 
-            <label>
-                อื่น ๆ โปรดระบุ
-                <input type="text" name="other_stakeholder">
-            </label>
-        </div>
+            <p>
+                บริษัท เบ็น เมเยอร์ ให้ความสำคัญกับความคิดเห็นและ
+                ความคาดหวังของผู้มีส่วนได้ส่วนเสียทุกภาคส่วน
 
-        <div class="section">
-            <h2>ส่วนที่ 2 ประเด็นความคาดหวังด้านสิ่งแวดล้อมที่มีความสำคัญต่อท่าน</h2>
+                ข้อมูลที่ได้รับจากแบบสอบถามนี้จะถูกนำไปใช้
+                เพื่อพัฒนาและปรับปรุงระบบการจัดการสิ่งแวดล้อม
+                ตามมาตรฐาน ISO 14001:2026
+            </p>
 
-            <label>
-                <input type="checkbox" name="expectation">
-                การใช้พลังงานอย่างมีประสิทธิภาพและการเปลี่ยนผ่านสู่พลังงานหมุนเวียน
-            </label>
+        </section>
 
-            <label>
-                <input type="checkbox" name="expectation">
-                การปล่อยก๊าซเรือนกระจก การเปลี่ยนแปลงสภาพภูมิอากาศ และการลดคาร์บอน
-            </label>
+        <!-- Survey Form -->
+        <form id="surveyForm">
 
-            <label>
-                <input type="checkbox" name="expectation">
-                การลดของเสีย การใช้ซ้ำ การรีไซเคิล และเศรษฐกิจหมุนเวียน
-            </label>
+            <!-- General Information -->
+            <section class="card">
 
-            <label>
-                <input type="checkbox" name="expectation">
-                การจัดการสารเคมี วัตถุอันตราย และของเสียอันตราย
-            </label>
+                <h2>ข้อมูลทั่วไป</h2>
 
-            <label>
-                <input type="checkbox" name="expectation">
-                การอนุรักษ์น้ำ การใช้น้ำอย่างมีประสิทธิภาพ และการจัดการน้ำเสีย
-            </label>
+                <div class="form-group">
+                    <label for="organization">
+                        ชื่อองค์กร / หน่วยงาน *
+                    </label>
 
-            <label>
-                <input type="checkbox" name="expectation">
-                การจัดซื้อจัดจ้างอย่างยั่งยืนและความโปร่งใสด้านสิ่งแวดล้อมในห่วงโซ่อุปทาน
-            </label>
+                    <input
+                        type="text"
+                        id="organization"
+                        name="organization"
+                        required>
+                </div>
 
-            <label>
-                <input type="checkbox" name="expectation">
-                คุณภาพอากาศ เสียง กลิ่น ฝุ่น และผลกระทบต่อชุมชน
-            </label>
+                <div class="form-group">
+                    <label for="contactName">
+                        ชื่อผู้ติดต่อ
+                    </label>
 
-            <label>
-                <input type="checkbox" name="expectation">
-                การคุ้มครองความหลากหลายทางชีวภาพ ระบบนิเวศ และการใช้ที่ดิน
-            </label>
+                    <input
+                        type="text"
+                        id="contactName"
+                        name="contactName">
+                </div>
 
-            <label>
-                <input type="checkbox" name="expectation">
-                ความพร้อมของทรัพยากรธรรมชาติ เช่น น้ำ พลังงาน และวัตถุดิบ
-            </label>
+                <div class="form-group">
+                    <label for="surveyDate">
+                        วันที่ตอบแบบสอบถาม
+                    </label>
 
-            <label>
-                <input type="checkbox" name="expectation">
-                ความเสี่ยงจากมลพิษสะสมหรือการปนเปื้อนในดิน น้ำ อากาศ
-            </label>
+                    <input
+                        type="date"
+                        id="surveyDate"
+                        name="surveyDate">
+                </div>
 
-            <label>
-                <input type="checkbox" name="expectation">
-                การสื่อสารข้อกำหนดด้านสิ่งแวดล้อมไปยังผู้ส่งมอบ ผู้รับเหมา และคู่ค้า
-            </label>
-        </div>
+            </section>
 
-        <div class="section">
-            <h2>ส่วนที่ 3 ความต้องการด้านสิ่งแวดล้อมที่สำคัญต่อท่าน</h2>
+            <!-- Stakeholder -->
+            <section class="card">
 
-            <label><input type="checkbox"> ต้องการให้คงไว้ซึ่งการรับรอง ISO 14001 และปรับปรุงเป็นเวอร์ชัน 2026</label>
-            <label><input type="checkbox"> มีแนวทางการใช้พลังงานอย่างมีประสิทธิภาพและพลังงานหมุนเวียนที่ชัดเจน</label>
-            <label><input type="checkbox"> มีผลรายงานด้านก๊าซเรือนกระจก การเปลี่ยนแปลงสภาพภูมิอากาศ และการลดคาร์บอน</label>
-            <label><input type="checkbox"> มีเป้าหมายการลดของเสีย การใช้ซ้ำ การรีไซเคิล และเศรษฐกิจหมุนเวียน</label>
-            <label><input type="checkbox"> มีแนวทางการจัดการสารเคมี วัตถุอันตราย และของเสียอันตราย</label>
-            <label><input type="checkbox"> มีแนวทางการอนุรักษ์น้ำ การใช้น้ำอย่างมีประสิทธิภาพ และการจัดการน้ำเสีย</label>
-            <label><input type="checkbox"> มีแนวทางควบคุมมลพิษทางอากาศ เสียง กลิ่น และฝุ่น</label>
-            <label><input type="checkbox"> มีการคุ้มครองความหลากหลายทางชีวภาพ ระบบนิเวศ และการใช้ที่ดิน</label>
-        </div>
+                <h2>
+                    ส่วนที่ 1 : ประเภทผู้มีส่วนได้ส่วนเสีย
+                </h2>
 
-        <div class="section">
-            <h2>ส่วนที่ 4 ข้อเสนอแนะและการปรับปรุงอย่างต่อเนื่อง</h2>
+                <label class="option-item">
+                    <input
+                        type="radio"
+                        name="stakeholderType"
+                        value="Customer">
+                    ลูกค้า / ผู้รับบริการ
+                </label>
 
-            <textarea
-                name="suggestion"
-                placeholder="กรุณาระบุข้อเสนอแนะหรือความคิดเห็นเพิ่มเติม"></textarea>
-        </div>
+                <label class="option-item">
+                    <input
+                        type="radio"
+                        name="stakeholderType"
+                        value="Supplier">
+                    ผู้ส่งมอบ / ผู้รับเหมา / ผู้ให้บริการภายนอก
+                </label>
 
-        <button type="submit">ส่งแบบสอบถาม</button>
+                <label class="option-item">
+                    <input
+                        type="radio"
+                        name="stakeholderType"
+                        value="Government">
+                    หน่วยงานราชการ / หน่วยงานกำกับดูแล
+                </label>
 
-    </form>
-</div>
+                <label class="option-item">
+                    <input
+                        type="radio"
+                        name="stakeholderType"
+                        value="Community">
+                    ชุมชน
+                </label>
+
+                <div class="form-group">
+
+                    <label for="otherStakeholder">
+                        อื่น ๆ โปรดระบุ
+                    </label>
+
+                    <input
+                        type="text"
+                        id="otherStakeholder"
+                        name="otherStakeholder">
+
+                </div>
+
+            </section>
+
+            <!-- Environmental Expectations -->
+            <section class="card">
+
+                <h2>
+                    ส่วนที่ 2 : ความคาดหวังด้านสิ่งแวดล้อม
+                </h2>
+
+                <label>
+                    <input type="checkbox"
+                        name="expectations"
+                        value="Energy">
+                    การใช้พลังงานอย่างมีประสิทธิภาพ
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                        name="expectations"
+                        value="GHG">
+                    การลดก๊าซเรือนกระจก
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                        name="expectations"
+                        value="Waste">
+                    การลดและการรีไซเคิลของเสีย
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                        name="expectations"
+                        value="Chemical">
+                    การจัดการสารเคมีและของเสียอันตราย
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                        name="expectations"
+                        value="Water">
+                    การอนุรักษ์น้ำและการจัดการน้ำเสีย
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                        name="expectations"
+                        value="Procurement">
+                    การจัดซื้อจัดจ้างอย่างยั่งยืน
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                        name="expectations"
+                        value="Air">
+                    คุณภาพอากาศ เสียง กลิ่น ฝุ่น
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                        name="expectations"
+                        value="Biodiversity">
+                    ความหลากหลายทางชีวภาพ
+                </label>
+
+            </section>
+
+            <!-- Environmental Requirements -->
+            <section class="card">
+
+                <h2>
+                    ส่วนที่ 3 : ความต้องการด้านสิ่งแวดล้อม
+                </h2>
+
+                <label>
+                    <input type="checkbox"
+                        name="requirements"
+                        value="ISO14001">
+                    คงไว้ซึ่งการรับรอง ISO 14001
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                        name="requirements"
+                        value="EnergyPolicy">
+                    มีนโยบายด้านพลังงานที่ชัดเจน
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                        name="requirements"
+                        value="CarbonReduction">
+                    มีเป้าหมายลดการปล่อยคาร์บอน
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                        name="requirements"
+                        value="WasteReduction">
+                    มีเป้าหมายลดของเสีย
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                        name="requirements"
+                        value="ChemicalControl">
+                    มีมาตรการควบคุมสารเคมี
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                        name="requirements"
+                        value="WaterManagement">
+                    มีการบริหารจัดการน้ำ
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                        name="requirements"
+                        value="PollutionControl">
+                    มีมาตรการควบคุมมลพิษ
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                        name="requirements"
+                        value="BiodiversityProtection">
+                    การคุ้มครองความหลากหลายทางชีวภาพ
+                </label>
+
+            </section>
+
+            <!-- Suggestion -->
+            <section class="card">
+
+                <h2>
+                    ส่วนที่ 4 : ข้อเสนอแนะเพิ่มเติม
+                </h2>
+
+                <textarea
+                    id="suggestion"
+                    name="suggestion"
+                    placeholder="กรุณาระบุข้อเสนอแนะเพิ่มเติม">
+                </textarea>
+
+            </section>
+
+            <!-- Agreement -->
+            <section class="card">
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        id="consent"
+                        required>
+
+                    ข้าพเจ้ายินยอมให้บริษัทนำข้อมูลนี้ไปใช้
+                    เพื่อการปรับปรุงระบบการจัดการสิ่งแวดล้อม
+
+                </label>
+
+            </section>
+
+            <!-- Submit -->
+            <div class="submit-container">
+
+                <button
+                    type="submit"
+                    class="btn-submit">
+
+                    ส่งแบบสอบถาม
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </main>
+
+    script.jsscript>
 
 </body>
+
 </html>
