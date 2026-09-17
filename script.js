@@ -60,22 +60,16 @@ surveyForm.addEventListener("submit", async (event) => {
     const formData = new FormData(surveyForm);
 
     const data = {
-    organization: formData.get("organization") || "",
-    contactName: formData.get("contactName") || "",
-    surveyDate: formData.get("surveyDate") || "",
-
-    stakeholderType: getSelectedStakeholderText(),
-
-    otherStakeholder: formData.get("otherStakeholder") || "",
-
-    expectations: getSelectedTextValues("expectations"),
-
-    requirements: getSelectedTextValues("requirements"),
-
-    suggestion: formData.get("suggestion") || "",
-
-    consent: document.getElementById("consent").checked
-};
+        organization: formData.get("organization") || "",
+        contactName: formData.get("contactName") || "",
+        surveyDate: formData.get("surveyDate") || "",
+        stakeholderType: formData.get("stakeholderType") || "",
+        otherStakeholder: formData.get("otherStakeholder") || "",
+        expectations: formData.getAll("expectations").join("; "),
+        requirements: formData.getAll("requirements").join("; "),
+        suggestion: formData.get("suggestion") || "",
+        consent: document.getElementById("consent").checked
+    };
 
     try {
         await fetch(GOOGLE_SCRIPT_URL, {
