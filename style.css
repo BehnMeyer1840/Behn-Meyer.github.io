@@ -1,0 +1,125 @@
+:root{
+    --primary:#00036E;
+    --secondary:#3D7BFF;
+    --light:#F5F8FF;
+    --white:#FFFFFF;
+    --text:#3A3A3A;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',Tahoma,sans-serif;
+    background:var(--light);
+    color:var(--text);
+    line-height:1.6;
+}
+
+.hero{
+    background:linear-gradient(
+        135deg,
+        #00036E,
+        #1F4FFF
+    );
+
+    color:white;
+    text-align:center;
+    padding:60px 20px;
+}
+
+.hero h1{
+    font-size:2rem;
+    margin-bottom:10px;
+}
+
+.hero p{
+    opacity:.9;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:30px 20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.card h2{
+    color:#00036E;
+    margin-bottom:15px;
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:500;
+}
+
+input[type=text],
+input[type=date],
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #d6d6d6;
+    border-radius:8px;
+}
+
+textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.option-item{
+    margin-bottom:10px;
+}
+
+input[type=radio],
+input[type=checkbox]{
+    margin-right:8px;
+}
+
+.submit-container{
+    text-align:center;
+    margin-top:30px;
+}
+
+.btn-submit{
+    background:#00036E;
+    color:white;
+    border:none;
+    padding:14px 28px;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.btn-submit:hover{
+    background:#3D7BFF;
+}
+
+@media(max-width:768px){
+
+    .hero h1{
+        font-size:1.5rem;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+}
