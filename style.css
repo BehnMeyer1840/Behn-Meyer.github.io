@@ -204,8 +204,19 @@ textarea {
 }
 
 .other-option input[type="text"]:disabled {
+    background: #eef2ee;
+    color: #6b756d;
     cursor: not-allowed;
-    opacity: 0.85;
+    opacity: 0.8;
+}
+
+.other-option:has(input[type="radio"]:checked) {
+    background: var(--surface-soft);
+}
+
+.other-option input[type="radio"]:checked + input[type="text"] {
+    background: #ffffff;
+    border: 1px solid var(--secondary);
 }
 
 input[type="radio"],
