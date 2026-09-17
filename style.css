@@ -66,6 +66,11 @@ body{
     margin-bottom:15px;
 }
 
+.card h3{
+    color:#000000;
+    font-size:20px;
+}
+
 .form-group{
     margin-bottom:20px;
 }
