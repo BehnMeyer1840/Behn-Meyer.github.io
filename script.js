@@ -3,12 +3,6 @@ const GOOGLE_SCRIPT_URL =
 
 const surveyForm = document.getElementById("surveyForm");
 
-// ไม่ต้องแสดงส่วนยืนยันความยินยอม
-const consentCard = document.querySelector(".consent-card");
-if (consentCard) {
-    consentCard.remove();
-}
-
 const otherStakeholder = document.getElementById("otherStakeholder");
 const otherStakeholderGroup = otherStakeholder?.closest(".form-group");
 
