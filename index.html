@@ -9,7 +9,7 @@
 <body>
     <header class="hero">
         <div class="hero-content">
-            <img src="logo.png" alt="Behn Meyer Logo" class="logo">
+            <img src="logo-light.png" alt="Behn Meyer Logo" class="logo">
             <div class="hero-text">
                 <h1>แบบฟอร์มระบบการจัดการสิ่งแวดล้อม ISO 14001:2026</h1>
                 <h1>แบบสอบถามความต้องการและความหวังของผู้มีส่วนได้ส่วนเสีย</h1>
@@ -20,52 +20,31 @@
     <main class="container">
         <section class="card">
             <h2>วัตถุประสงค์</h2>
-            <p>เพื่อรวบรวมและทบทวนความต้องการ ความคาดหวัง และข้อกำหนดที่เกี่ยวข้องกับการจัดการสิ่งแวดล้อมภายในและภายนอกองค์กร เพื่อเพิ่มประสิทธิภาพในการจัดการสิ่งแวดล้อมและการพัฒนาต่อเนื่อง</p>
+            <p>เพื่อรวบรวมและทบทวนความต้องการ ความคาดหวัง และข้อกำหนดที่เกี่ยวข้องกับการปฏิบัติงานด้านสิ่งแวดล้อมของผู้มีส่วนได้ส่วนเสียภายในและภายนอกองค์กร เพื่อใช้เป็นข้อมูลในการปรับปรุงประสิทธิภาพและความยั่งยืน</p>
         </section>
         <section class="card">
             <h2>ขอบเขต</h2>
-            <p>ใช้สำหรับผู้มีส่วนได้ส่วนเสียภายในและภายนอกที่เกี่ยวข้องกับกิจกรรมของกลุ่มบริษัทเบ็นไมเยอร์ ประเทศไทย และผู้มีส่วนได้ส่วนเสียที่มีอิทธิพลต่อผลการดำเนินงานด้านสิ่งแวดล้อม</p>
+            <p>ใช้สำหรับผู้มีส่วนได้ส่วนเสียภายในและภายนอกที่เกี่ยวข้องกับกิจกรรม กระบวนการ และการดำเนินงานด้านสิ่งแวดล้อมของกลุ่มบริษัทเบ็นไมเยอร์ ประเทศไทย</p>
         </section>
         <section class="card">
             <h2>คำแนะนำ</h2>
-            <p>โปรดทำเครื่องหมายในช่องที่ตรงกับความคิดเห็นของท่าน และระบุรายละเอียดเพิ่มเติมที่จำเป็น เพื่อให้การประเมินและการวางแผนด้านสิ่งแวดล้อมมีความครบถ้วนและสอดคล้องกับความต้องการจริง</p>
+            <p>โปรดทำเครื่องหมายในช่องที่ตรงกับความคิดเห็นของท่าน และระบุรายละเอียดเพิ่มเติมให้ครบถ้วน เพื่อให้ข้อมูลที่ได้รับมีความสมบูรณ์และสามารถนำไปใช้ในการปรับปรุงอย่างต่อเนื่อง</p>
         </section>
 
         <form id="surveyForm">
             <section class="card">
                 <h2>ข้อมูลทั่วไป</h2>
-                <div class="form-group">
-                    <label for="organization">ชื่อองค์กร / หน่วยงาน *</label>
-                    <input type="text" id="organization" name="organization" maxlength="200" required>
-                </div>
-                <div class="form-group">
-                    <label for="contactName">ชื่อผู้ติดต่อ</label>
-                    <input type="text" id="contactName" name="contactName" maxlength="200">
-                </div>
-                <div class="form-group">
-                    <label for="surveyDate">วันที่ตอบแบบสอบถาม</label>
-                    <input type="date" id="surveyDate" name="surveyDate">
-                </div>
+                <div class="form-group"><label for="organization">ชื่อองค์กร / หน่วยงาน *</label><input type="text" id="organization" name="organization" maxlength="200" required></div>
+                <div class="form-group"><label for="contactName">ชื่อผู้ติดต่อ</label><input type="text" id="contactName" name="contactName" maxlength="200"></div>
+                <div class="form-group"><label for="surveyDate">วันที่ตอบแบบสอบถาม</label><input type="date" id="surveyDate" name="surveyDate"></div>
             </section>
 
             <section class="card">
                 <h2>ส่วนที่ 1 : ประเภทผู้มีส่วนได้ส่วนเสีย (เลือกเพียงหนึ่งข้อ)</h2>
-                <label class="option-item">
-                    <input type="radio" name="stakeholderType" value="Customer" required>
-                    <span>ลูกค้า / ผู้รับบริการ</span>
-                </label>
-                <label class="option-item">
-                    <input type="radio" name="stakeholderType" value="Supplier">
-                    <span>ผู้ส่งมอบ / ผู้รับเหมา / ผู้ให้บริการภายนอก</span>
-                </label>
-                <label class="option-item">
-                    <input type="radio" name="stakeholderType" value="Government">
-                    <span>หน่วยงานกำกับดูแล / หน่วยงานราชการ / องค์กรปกครองส่วนท้องถิ่น</span>
-                </label>
-                <label class="option-item other-option">
-                    <input type="radio" name="stakeholderType" value="Other" id="otherStakeholderOption">
-                    <input type="text" id="otherStakeholder" name="otherStakeholder" placeholder="Other" aria-label="ระบุประเภทผู้มีส่วนได้ส่วนเสียอื่นๆ">
-                </label>
+                <label class="option-item"><input type="radio" name="stakeholderType" value="Customer" required><span>ลูกค้า / ผู้รับบริการ</span></label>
+                <label class="option-item"><input type="radio" name="stakeholderType" value="Supplier"><span>ผู้ส่งมอบ / ผู้รับเหมา / ผู้ให้บริการภายนอก</span></label>
+                <label class="option-item"><input type="radio" name="stakeholderType" value="Government"><span>หน่วยงานกำกับดูแล / หน่วยงานราชการ / องค์กรปกครองส่วนท้องถิ่น</span></label>
+                <label class="option-item other-option"><input type="radio" name="stakeholderType" value="Other" id="otherStakeholderOption"><input type="text" id="otherStakeholder" name="otherStakeholder" placeholder="Other" aria-label="ระบุประเภทผู้มีส่วนได้ส่วนเสียอื่นๆ"></label>
             </section>
 
             <section class="card">
@@ -80,7 +59,7 @@
                 <label class="check-item"><input type="checkbox" name="expectations" value="Air"><span>คุณภาพอากาศ เสียง กลิ่น ฝุ่น และสิ่งแวดล้อมเชิงพื้นที่</span></label>
                 <label class="check-item"><input type="checkbox" name="expectations" value="Biodiversity"><span>การคุ้มครองความหลากหลายทางชีวภาพและระบบนิเวศ</span></label>
                 <label class="check-item"><input type="checkbox" name="expectations" value="Natural"><span>ความพร้อมของทรัพยากรธรรมชาติ และการจัดการอย่างยั่งยืน</span></label>
-                <label class="check-item"><input type="checkbox" name="expectations" value="Pollution"><span>ความเสี่ยงจากมลพิษสะสมหรือระบาดต่อสุขภาพและสิ่งแวดล้อม</span></label>
+                <label class="check-item"><input type="checkbox" name="expectations" value="Pollution"><span>ความเสี่ยงจากมลพิษสะสมหรือระดับสูงต่อสุขภาพและสิ่งแวดล้อม</span></label>
                 <label class="check-item"><input type="checkbox" name="expectations" value="Control"><span>คาดหวังให้องค์กรควบคุมหรือสื่อสารเพื่อบรรลุเป้าหมายสิ่งแวดล้อม</span></label>
             </section>
 
@@ -97,20 +76,13 @@
                 <label class="check-item"><input type="checkbox" name="requirements" value="BiodiversityProtection"><span>มีการสื่อสารและให้การคุ้มครองความหลากหลายทางชีวภาพอย่างชัดเจน</span></label>
             </section>
 
-            <section class="card">
-                <h2>ส่วนที่ 4 : ข้อเสนอแนะและการปรับปรุงอย่างต่อเนื่อง</h2>
-                <h3>ท่านมีข้อเสนอแนะเกี่ยวกับมาตรการ กิจกรรม หรือการสื่อสารใดที่ควรปรับปรุงเพิ่มเติมหรือไม่</h3>
-                <textarea id="suggestion" name="suggestion" placeholder="กรุณาระบุข้อเสนอแนะเพิ่มเติม" maxlength="5000" ></textarea>
-            </section>
-
-            <div class="submit-container">
-                <button type="submit" class="btn-submit">ส่งแบบสอบถาม</button>
-            </div>
+            <section class="card"><h2>ส่วนที่ 4 : ข้อเสนอแนะและการปรับปรุงอย่างต่อเนื่อง</h2><h3>ท่านมีข้อเสนอแนะเกี่ยวกับมาตรการ กิจกรรม หรือการสื่อสารใดที่ควรปรับปรุงเพิ่มเติมหรือไม่</h3><textarea id="suggestion" name="suggestion" placeholder="กรุณาระบุข้อเสนอแนะเพิ่มเติม" maxlength="5000"></textarea></section>
+            <div class="submit-container"><button type="submit" class="btn-submit">ส่งแบบสอบถาม</button></div>
         </form>
     </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.fog.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.topology.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
