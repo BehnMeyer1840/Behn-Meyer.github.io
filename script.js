@@ -62,7 +62,6 @@ function createTimeoutSignal() {
     return controller.signal;
 }
 
-// อ่านข้อความที่แสดงใน label แทนค่า value ของ input
 function getLabelText(input) {
     const label = input.closest("label");
 
@@ -79,13 +78,31 @@ function getLabelText(input) {
     return labelClone.textContent.replace(/\s+/g, " ").trim();
 }
 
-function getSelectedLabelTexts(name) {
+function getSelectedInputs(name) {
     return Array.from(
         surveyForm.querySelectorAll(`input[name="${name}"]:checked`)
-    )
+    );
+}
+
+function getSelectedCodes(name) {
+    return getSelectedInputs(name)
+        .map((input) => input.value)
+        .join("; ");
+}
+
+function getSelectedTexts(name) {
+    return getSelectedInputs(name)
         .map((input) => getLabelText(input))
         .filter(Boolean)
         .join("; ");
+}
+
+function getSelectedStakeholderCode() {
+    const selectedInput = surveyForm.querySelector(
+        'input[name="stakeholderType"]:checked'
+    );
+
+    return selectedInput ? selectedInput.value : "";
 }
 
 function getSelectedStakeholderText() {
@@ -97,7 +114,6 @@ function getSelectedStakeholderText() {
         return "";
     }
 
-    // กรณี Other ให้ส่งข้อความที่ผู้ใช้ระบุเอง
     if (selectedInput.value === "Other") {
         return String(otherStakeholder?.value || "").trim();
     }
@@ -113,12 +129,20 @@ function getPayload() {
         organization: String(formData.get("organization") || "").trim(),
         contactName: String(formData.get("contactName") || "").trim(),
         surveyDate: String(formData.get("surveyDate") || "").trim(),
-        stakeholderType: getSelectedStakeholderText(),
+
+        // Code ใช้สำหรับตรวจสอบฝั่ง Apps Script
+        stakeholderType: getSelectedStakeholderCode(),
+        expectations: getSelectedCodes("expectations"),
+        requirements: getSelectedCodes("requirements"),
+
+        // Text ใช้สำหรับบันทึกข้อความที่ผู้ใช้เห็นใน Google Sheet
+        stakeholderTypeText: getSelectedStakeholderText(),
+        expectationsText: getSelectedTexts("expectations"),
+        requirementsText: getSelectedTexts("requirements"),
+
         otherStakeholder: String(
             formData.get("otherStakeholder") || ""
         ).trim(),
-        expectations: getSelectedLabelTexts("expectations"),
-        requirements: getSelectedLabelTexts("requirements"),
         suggestion: String(formData.get("suggestion") || "").trim(),
         website: String(formData.get("website") || "").trim()
     };
@@ -157,21 +181,20 @@ surveyForm.addEventListener("submit", async (event) => {
             },
             body: JSON.stringify(getPayload()),
             signal: createTimeoutSignal()
-        }).catch((error) => {
-            console.warn(
-                "fetch ถูกปัดเป็น warning เนื่องจาก no-cors / CORS boundary:",
-                error
-            );
         });
 
-        alert("บันทึกแบบสอบถามเรียบร้อยแล้ว");
-
+        alert("ส่งแบบสอบถามเรียบร้อยแล้ว");
         surveyForm.reset();
         syncSelectedState();
         updateOtherFieldState();
     } catch (error) {
         console.error("ส่งข้อมูลไม่สำเร็จ:", error);
-        alert("บันทึกแบบสอบถามเรียบร้อยแล้ว");
+
+        if (error.name === "AbortError") {
+            alert("การส่งข้อมูลใช้เวลานานเกินไป กรุณาตรวจสอบ Google Sheet ก่อนส่งซ้ำ");
+        } else {
+            alert("ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่อีกครั้ง");
+        }
     } finally {
         submitButton.disabled = false;
         submitButton.textContent = "ส่งแบบสอบถาม";
