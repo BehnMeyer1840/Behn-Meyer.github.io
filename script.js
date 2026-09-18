@@ -1,5 +1,5 @@
 const GOOGLE_SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbzkM8QRes30RXHRh2PJAUyYFjIm8grYFotBcUk1_jIFauBd6TqKCV-PM9hMPlsVGfyU/exec";
+    "https://script.google.com/macros/s/AKfycbzwUDKSs8vIv8C42PLTMid9Le0ngWZb2ymh5qPawiD9rTL4JBuVXZh8QMCPuU4yRnbf/exec";
 const REQUEST_TIMEOUT_MS = 15000;
 
 const surveyForm = document.getElementById("surveyForm");
