@@ -131,12 +131,10 @@ function getPayload() {
         contactName: String(formData.get("contactName") || "").trim(),
         surveyDate: String(formData.get("surveyDate") || "").trim(),
 
-        // Code ใช้สำหรับตรวจสอบฝั่ง Apps Script
         stakeholderType: getSelectedStakeholderCode(),
         expectations: getSelectedCodes("expectations"),
         requirements: getSelectedCodes("requirements"),
 
-        // Text ใช้สำหรับบันทึกข้อความที่ผู้ใช้เห็นใน Google Sheet
         stakeholderTypeText: getSelectedStakeholderText(),
         expectationsText: getSelectedTexts("expectations"),
         requirementsText: getSelectedTexts("requirements"),
@@ -204,3 +202,25 @@ surveyForm.addEventListener("submit", async (event) => {
 
 syncSelectedState();
 updateOtherFieldState();
+
+window.addEventListener("load", () => {
+    const hero = document.querySelector(".hero");
+
+    if (window.VANTA && hero) {
+        window.vantaEffect = VANTA.FOG({
+            el: hero,
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200,
+            minWidth: 200,
+            highlightColor: 0x9dcf63,
+            midtoneColor: 0x2c7d5b,
+            lowlightColor: 0x123d2e,
+            baseColor: 0xeaf5ee,
+            blurFactor: 0.6,
+            zoom: 1.08,
+            speed: 0.8
+        });
+    }
+});
