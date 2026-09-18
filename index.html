@@ -36,11 +36,11 @@
                 <h2>ข้อมูลทั่วไป</h2>
                 <div class="form-group">
                     <label for="organization">ชื่อองค์กร / หน่วยงาน *</label>
-                    <input type="text" id="organization" name="organization" required>
+                    <input type="text" id="organization" name="organization" maxlength="200" required>
                 </div>
                 <div class="form-group">
                     <label for="contactName">ชื่อผู้ติดต่อ</label>
-                    <input type="text" id="contactName" name="contactName">
+                    <input type="text" id="contactName" name="contactName" maxlength="200">
                 </div>
                 <div class="form-group">
                     <label for="surveyDate">วันที่ตอบแบบสอบถาม</label>
@@ -64,7 +64,7 @@
                 </label>
                 <label class="option-item other-option">
                     <input type="radio" name="stakeholderType" value="Other" id="otherStakeholderOption">
-                    <input type="text" id="otherStakeholder" name="otherStakeholder" placeholder="Other" aria-label="ระบุประเภทผู้มีส่วนได้ส่วนเสียอื่น ๆ" disabled>
+                    <input type="text" id="otherStakeholder" name="otherStakeholder" placeholder="Other" aria-label="ระบุประเภทผู้มีส่วนได้ส่วนเสียอื่น ๆ" maxlength="100" disabled>
                 </label>
             </section>
 
@@ -100,7 +100,7 @@
             <section class="card">
                 <h2>ส่วนที่ 4 : ข้อเสนอแนะและการปรับปรุงอย่างต่อเนื่อง</h2>
                 <h3>ท่านมีข้อเสนอแนะเกี่ยวกับมาตรการ กิจกรรม หรือการสื่อสารใดที่องค์กรควรปรับปรุงหรือเพิ่มเติม</h3>
-                <textarea id="suggestion" name="suggestion" placeholder="กรุณาระบุข้อเสนอแนะเพิ่มเติม"></textarea>
+                <textarea id="suggestion" name="suggestion" placeholder="กรุณาระบุข้อเสนอแนะเพิ่มเติม" maxlength="5000" ></textarea>
             </section>
 
             <div class="submit-container">
