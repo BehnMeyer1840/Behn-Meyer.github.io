@@ -62,6 +62,49 @@ function createTimeoutSignal() {
     return controller.signal;
 }
 
+// อ่านข้อความที่แสดงใน label แทนค่า value ของ input
+function getLabelText(input) {
+    const label = input.closest("label");
+
+    if (!label) {
+        return input.value;
+    }
+
+    const labelClone = label.cloneNode(true);
+
+    labelClone.querySelectorAll("input").forEach((element) => {
+        element.remove();
+    });
+
+    return labelClone.textContent.replace(/\s+/g, " ").trim();
+}
+
+function getSelectedLabelTexts(name) {
+    return Array.from(
+        surveyForm.querySelectorAll(`input[name="${name}"]:checked`)
+    )
+        .map((input) => getLabelText(input))
+        .filter(Boolean)
+        .join("; ");
+}
+
+function getSelectedStakeholderText() {
+    const selectedInput = surveyForm.querySelector(
+        'input[name="stakeholderType"]:checked'
+    );
+
+    if (!selectedInput) {
+        return "";
+    }
+
+    // กรณี Other ให้ส่งข้อความที่ผู้ใช้ระบุเอง
+    if (selectedInput.value === "Other") {
+        return String(otherStakeholder?.value || "").trim();
+    }
+
+    return getLabelText(selectedInput);
+}
+
 function getPayload() {
     const formData = new FormData(surveyForm);
 
@@ -70,14 +113,12 @@ function getPayload() {
         organization: String(formData.get("organization") || "").trim(),
         contactName: String(formData.get("contactName") || "").trim(),
         surveyDate: String(formData.get("surveyDate") || "").trim(),
-        stakeholderType: String(
-            formData.get("stakeholderType") || ""
-        ).trim(),
+        stakeholderType: getSelectedStakeholderText(),
         otherStakeholder: String(
             formData.get("otherStakeholder") || ""
         ).trim(),
-        expectations: formData.getAll("expectations").join("; "),
-        requirements: formData.getAll("requirements").join("; "),
+        expectations: getSelectedLabelTexts("expectations"),
+        requirements: getSelectedLabelTexts("requirements"),
         suggestion: String(formData.get("suggestion") || "").trim(),
         website: String(formData.get("website") || "").trim()
     };
@@ -117,7 +158,10 @@ surveyForm.addEventListener("submit", async (event) => {
             body: JSON.stringify(getPayload()),
             signal: createTimeoutSignal()
         }).catch((error) => {
-            console.warn("fetch ถูกปัดเป็น warning เนื่องจาก no-cors / CORS boundary:", error);
+            console.warn(
+                "fetch ถูกปัดเป็น warning เนื่องจาก no-cors / CORS boundary:",
+                error
+            );
         });
 
         alert("บันทึกแบบสอบถามเรียบร้อยแล้ว");
@@ -127,7 +171,6 @@ surveyForm.addEventListener("submit", async (event) => {
         updateOtherFieldState();
     } catch (error) {
         console.error("ส่งข้อมูลไม่สำเร็จ:", error);
-
         alert("บันทึกแบบสอบถามเรียบร้อยแล้ว");
     } finally {
         submitButton.disabled = false;
