@@ -108,30 +108,17 @@ surveyForm.addEventListener("submit", async (event) => {
     submitButton.textContent = "กำลังบันทึกข้อมูล...";
 
     try {
-        const response = await fetch(GOOGLE_SCRIPT_URL, {
+        // Google Apps Script ไม่เปิดให้ GitHub Pages อ่าน response ได้อย่างสมบูรณ์
+        // จึงใช้ no-cors และไม่พยายามอ่าน response.json() ซึ่งทำให้เกิด false error
+        await fetch(GOOGLE_SCRIPT_URL, {
             method: "POST",
+            mode: "no-cors",
             headers: {
                 "Content-Type": "text/plain;charset=utf-8"
             },
             body: JSON.stringify(getPayload()),
             signal: createTimeoutSignal()
         });
-
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
-
-        let result;
-
-        try {
-            result = await response.json();
-        } catch (error) {
-            throw new Error("Response is not valid JSON");
-        }
-
-        if (!result || result.success !== true) {
-            throw new Error(result?.message || "บันทึกข้อมูลไม่สำเร็จ");
-        }
 
         alert("บันทึกแบบสอบถามเรียบร้อยแล้ว");
 
@@ -143,8 +130,8 @@ surveyForm.addEventListener("submit", async (event) => {
 
         const message =
             error.name === "AbortError"
-                ? "การส่งข้อมูลใช้เวลานานเกินไป กรุณาลองใหม่อีกครั้ง"
-                : "ไม่สามารถบันทึกข้อมูลได้ กรุณาลองใหม่อีกครั้ง";
+                ? "การส่งข้อมูลใช้เวลานานเกินไป กรุณาตรวจสอบข้อมูลในระบบก่อนส่งซ้ำ"
+                : "ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่อีกครั้ง";
 
         alert(message);
     } finally {
