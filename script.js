@@ -3,6 +3,12 @@ const GOOGLE_SCRIPT_URL =
 
 const surveyForm = document.getElementById("surveyForm");
 
+// ไม่ต้องแสดงส่วนยืนยันความยินยอม
+const consentCard = document.querySelector(".consent-card");
+if (consentCard) {
+    consentCard.remove();
+}
+
 const otherStakeholder = document.getElementById("otherStakeholder");
 const otherStakeholderGroup = otherStakeholder?.closest(".form-group");
 
@@ -96,13 +102,6 @@ function updateOtherFieldState() {
 
 /*
  * ดึงข้อความภาษาไทยจาก label
- *
- * รองรับ HTML ปัจจุบันที่เขียนแบบ:
- *
- * <label>
- *     <input type="checkbox" value="Energy">
- *     การใช้พลังงานอย่างมีประสิทธิภาพ
- * </label>
  */
 function getLabelText(input) {
     const label = input.closest("label");
@@ -112,16 +111,13 @@ function getLabelText(input) {
     }
 
     const labelClone = label.cloneNode(true);
-
     const inputElements = labelClone.querySelectorAll("input");
 
     inputElements.forEach((element) => {
         element.remove();
     });
 
-    return labelClone.textContent
-        .replace(/\s+/g, " ")
-        .trim();
+    return labelClone.textContent.replace(/\s+/g, " ").trim();
 }
 
 /*
@@ -190,22 +186,13 @@ surveyForm.addEventListener("submit", async (event) => {
 
     const data = {
         organization: formData.get("organization") || "",
-
         contactName: formData.get("contactName") || "",
-
         surveyDate: formData.get("surveyDate") || "",
-
         stakeholderType: getSelectedStakeholderText(),
-
         otherStakeholder: formData.get("otherStakeholder") || "",
-
         expectations: getSelectedTextValues("expectations"),
-
         requirements: getSelectedTextValues("requirements"),
-
-        suggestion: formData.get("suggestion") || "",
-
-        consent: document.getElementById("consent").checked
+        suggestion: formData.get("suggestion") || ""
     };
 
     try {
@@ -221,15 +208,11 @@ surveyForm.addEventListener("submit", async (event) => {
         alert("บันทึกแบบสอบถามเรียบร้อยแล้ว");
 
         surveyForm.reset();
-
         syncSelectedState();
         updateOtherFieldState();
-
     } catch (error) {
         console.error("ส่งข้อมูลไม่สำเร็จ:", error);
-
         alert("ไม่สามารถบันทึกข้อมูลได้ กรุณาลองใหม่อีกครั้ง");
-
     } finally {
         submitButton.disabled = false;
         submitButton.textContent = "ส่งแบบสอบถาม";
