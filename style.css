@@ -44,8 +44,8 @@ body {
     isolation: isolate;
     color: #fff;
     background:
-        linear-gradient(110deg, rgba(27, 79, 39, 0.84) 0%, rgba(70, 129, 43, 0.68) 45%, rgba(185, 154, 48, 0.48) 100%),
-        url("https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=1800&q=85") center / cover;
+        linear-gradient(110deg, rgba(11, 64, 38, 0.88) 0%, rgba(31, 107, 69, 0.68) 48%, rgba(94, 133, 49, 0.46) 100%),
+        url("https://png.pngtree.com/thumb_back/fh260/background/20240717/pngtree-3d-sustainable-living-photograph-eco-friendly-practices-in-daily-life-image_16017048.jpg") center / cover;
     padding: clamp(38px, 6vw, 76px) 24px clamp(44px, 7vw, 88px);
     box-shadow: 0 10px 26px rgba(31, 107, 69, 0.22);
 }
@@ -64,7 +64,7 @@ body {
     height: 280px;
     right: -80px;
     top: -130px;
-    box-shadow: -90px 170px 0 18px rgba(232, 214, 93, 0.16);
+    box-shadow: -90px 170px 0 18px rgba(185, 215, 71, 0.16);
 }
 
 .hero::after {
