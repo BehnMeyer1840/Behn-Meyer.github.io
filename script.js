@@ -1,4 +1,5 @@
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz7tKW4kJaBOQsjdfgsbcUnt4nEjuSZP3kw0Pub5voz3rufnUzU6oT1kQ-ya3tIjSKu/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz1aiXPDGlDos8nG8OcIHY9ZH0KSewzvt-Ahf13zBnEzUGfm6OvSoXnbj7nmz89jdsr/exec";
+
 const REQUEST_TIMEOUT_MS = 15000;
 const form = document.getElementById("surveyForm");
 const status = document.getElementById("formStatus");
