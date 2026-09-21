@@ -85,9 +85,8 @@ form.addEventListener("submit", async event => {
         if (!result.success) throw new Error(result.message || "ไม่สามารถบันทึกข้อมูลได้");
         setStatus(result.message || "บันทึกข้อมูลเรียบร้อยแล้ว", "success");
 
-        console.log("ส่งข้อมูลสำเร็จ กำลังเปลี่ยนหน้า");
-        window.location.assign("https://behnmeyer1840.github.io/Behn-Meyer.github.io/index2.html");
-
+        window.location.href = "index2.html";
+        
         form.reset();
         syncSelectedState();
         syncOtherField();
