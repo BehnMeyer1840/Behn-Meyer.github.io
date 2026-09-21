@@ -104,9 +104,14 @@ img {
 
 .intro-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 20px;
     margin-bottom: 20px;
+}
+
+/* Hide the scope card and let the objective card use the full width. */
+.intro-grid .card:nth-child(2) {
+    display: none;
 }
 
 .card {
@@ -119,7 +124,6 @@ img {
 
 .card h2 {
     margin: 0 0 12px;
-    
     color: var(--deep);
     font-size: 1.35rem;
 }
