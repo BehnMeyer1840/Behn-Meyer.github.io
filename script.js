@@ -10,7 +10,6 @@ const otherInput = document.getElementById("otherStakeholder");
 if (!form) throw new Error("ไม่พบแบบฟอร์ม surveyForm");
 
 function selectedInputs(name) { return [...form.querySelectorAll(`input[name="${name}"]:checked`)]; }
-function selectedCodes(name) { return selectedInputs(name).map(input => input.value).join(";"); }
 function labelText(input) {
     const label = input.closest("label");
     if (!label) return input.value;
@@ -46,14 +45,15 @@ function payload() {
         organization: String(data.get("organization") || "").trim(),
         contactName: String(data.get("contactName") || "").trim(),
         surveyDate: String(data.get("surveyDate") || ""),
-        stakeholderType: stakeholder?.value || "",
+        // ส่งข้อความที่แสดงในแบบฟอร์มแทนค่า value เช่น Customer หรือ Energy
+        stakeholderType: stakeholder ? (stakeholder.value === "Other" ? String(data.get("otherStakeholder") || "").trim() : labelText(stakeholder)) : "",
         stakeholderTypeText: stakeholder ? (stakeholder.value === "Other" ? String(data.get("otherStakeholder") || "").trim() : labelText(stakeholder)) : "",
         otherStakeholder: String(data.get("otherStakeholder") || "").trim(),
-        expectations: selectedCodes("expectations"),
+        expectations: selectedText("expectations"),
         expectationsText: selectedText("expectations"),
-        requirements: selectedCodes("requirements"),
+        requirements: selectedText("requirements"),
         requirementsText: selectedText("requirements"),
-        climateActions: selectedCodes("climateActions"),
+        climateActions: selectedText("climateActions"),
         climateActionsText: selectedText("climateActions"),
         suggestion: String(data.get("suggestion") || "").trim()
     };
@@ -76,7 +76,7 @@ form.addEventListener("submit", async event => {
         syncOtherField();
         window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
-        setStatus(error.name === "AbortError" ? "หมดเวลาการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง" : (error.message || "ไม่สามารถเชื่อมต่อระบบได้ กรุณาลองใหม่อีกครั้ง"), "error");
+        setStatus(error.name === "AbortError" ? "หมดเวลาการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง" : (error.message || "ไม่สามารถส่งข้อมูลได้"), "error");
     } finally { request.clear(); submitButton.disabled = false; }
 });
 
