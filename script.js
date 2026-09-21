@@ -1,22 +1,83 @@
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz7tKW4kJaBOQsjdfgsbcUnt4nEjuSZP3kw0Pub5voz3rufnUzU6oT1kQ-ya3tIjSKu/exec";
 const REQUEST_TIMEOUT_MS = 15000;
-const surveyForm = document.getElementById("surveyForm");
-if (!surveyForm) throw new Error("ไม่พบแบบฟอร์ม surveyForm");
+const form = document.getElementById("surveyForm");
+const status = document.getElementById("formStatus");
+const submitButton = form?.querySelector(".btn-submit");
 const otherRadio = document.getElementById("otherStakeholderOption");
-const otherStakeholder = document.getElementById("otherStakeholder");
-function getToggleInputs() { return surveyForm.querySelectorAll('input[type="radio"], input[type="checkbox"]'); }
-function syncSelectedState() { getToggleInputs().forEach((input) => { const container = input.closest(".option-item, .check-item"); if (container) container.classList.toggle("is-selected", input.checked); }); }
-function updateOtherFieldState() { if (!otherRadio || !otherStakeholder) return; const selected = otherRadio.checked; otherStakeholder.disabled = !selected; otherStakeholder.required = selected; otherStakeholder.setAttribute("aria-disabled", String(!selected)); if (!selected) otherStakeholder.value = ""; }
-function createSubmissionId() { return window.crypto?.randomUUID ? window.crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`; }
-function createTimeoutSignal() { if (typeof AbortSignal !== "undefined" && AbortSignal.timeout) return AbortSignal.timeout(REQUEST_TIMEOUT_MS); const controller = new AbortController(); window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS); return controller.signal; }
-function getLabelText(input) { const label = input.closest("label"); if (!label) return input.value; const clone = label.cloneNode(true); clone.querySelectorAll("input").forEach((element) => element.remove()); return clone.textContent.replace(/\s+/g, " ").trim(); }
-function getSelectedInputs(name) { return Array.from(surveyForm.querySelectorAll(`input[name="${name}"]:checked`)); }
-function getSelectedCodes(name) { return getSelectedInputs(name).map((input) => input.value).join("; "); }
-function getSelectedTexts(name) { return getSelectedInputs(name).map(getLabelText).filter(Boolean).join("; "); }
-function getSelectedStakeholderCode() { const input = surveyForm.querySelector('input[name="stakeholderType"]:checked'); return input ? input.value : ""; }
-function getSelectedStakeholderText() { const input = surveyForm.querySelector('input[name="stakeholderType"]:checked'); if (!input) return ""; return input.value === "Other" ? String(otherStakeholder?.value || "").trim() : getLabelText(input); }
-function getPayload() { const data = new FormData(surveyForm); return { submissionId: createSubmissionId(), organization: String(data.get("organization") || "").trim(), contactName: String(data.get("contactName") || "").trim(), surveyDate: String(data.get("surveyDate") || "").trim(), stakeholderType: getSelectedStakeholderCode(), expectations: getSelectedCodes("expectations"), requirements: getSelectedCodes("requirements"), stakeholderTypeText: getSelectedStakeholderText(), expectationsText: getSelectedTexts("expectations"), requirementsText: getSelectedTexts("requirements"), otherStakeholder: String(data.get("otherStakeholder") || "").trim(), suggestion: String(data.get("suggestion") || "").trim(), website: String(data.get("website") || "").trim() }; }
-getToggleInputs().forEach((input) => input.addEventListener("change", () => { syncSelectedState(); updateOtherFieldState(); }));
-surveyForm.addEventListener("submit", async (event) => { event.preventDefault(); if (!surveyForm.checkValidity()) { surveyForm.reportValidity(); return; } const button = surveyForm.querySelector(".btn-submit"); if (!button) throw new Error("ไม่พบปุ่มส่งแบบสอบถาม"); button.disabled = true; button.textContent = "กำลังบันทึกข้อมูล..."; try { await fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(getPayload()), signal: createTimeoutSignal() }); alert("ส่งแบบสอบถามเรียบร้อยแล้ว"); surveyForm.reset(); syncSelectedState(); updateOtherFieldState(); } catch (error) { console.error("ส่งข้อมูลไม่สำเร็จ:", error); alert(error.name === "AbortError" ? "การส่งข้อมูลใช้เวลานานเกินไป กรุณาตรวจสอบ Google Sheet ก่อนส่งซ้ำ" : "ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่อีกครั้ง"); } finally { button.disabled = false; button.textContent = "ส่งแบบสอบถาม"; } });
-syncSelectedState(); updateOtherFieldState();
-window.addEventListener("load", () => { const hero = document.querySelector(".hero"); if (window.VANTA?.TOPOLOGY && hero) { window.vantaEffect = window.VANTA.TOPOLOGY({ el: hero, mouseControls: true, touchControls: true, gyroControls: false, minHeight: 240, minWidth: 200, scale: 1, scaleMobile: 1, backgroundColor: 0x022222, color: 0x89964e }); } });
+const otherInput = document.getElementById("otherStakeholder");
+
+if (!form) throw new Error("ไม่พบแบบฟอร์ม surveyForm");
+
+function selectedInputs(name) { return [...form.querySelectorAll(`input[name="${name}"]:checked`)]; }
+function selectedCodes(name) { return selectedInputs(name).map(input => input.value).join(";"); }
+function labelText(input) {
+    const label = input.closest("label");
+    if (!label) return input.value;
+    const clone = label.cloneNode(true);
+    clone.querySelectorAll("input").forEach(element => element.remove());
+    return clone.textContent.replace(/\s+/g, " ").trim();
+}
+function selectedText(name) { return selectedInputs(name).map(labelText).filter(Boolean).join("; "); }
+function submissionId() { return crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`; }
+function syncSelectedState() {
+    form.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => {
+        input.closest(".option-item, .check-item")?.classList.toggle("is-selected", input.checked);
+    });
+}
+function syncOtherField() {
+    const active = Boolean(otherRadio?.checked);
+    otherInput.disabled = !active;
+    otherInput.required = active;
+    if (!active) otherInput.value = "";
+}
+function setStatus(message, type = "") { status.textContent = message; status.className = `form-status ${type}`; }
+function timeoutSignal() {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+    return { signal: controller.signal, clear: () => clearTimeout(timer) };
+}
+function payload() {
+    const data = new FormData(form);
+    const stakeholder = form.querySelector('input[name="stakeholderType"]:checked');
+    return {
+        submissionId: submissionId(),
+        website: String(data.get("website") || ""),
+        organization: String(data.get("organization") || "").trim(),
+        contactName: String(data.get("contactName") || "").trim(),
+        surveyDate: String(data.get("surveyDate") || ""),
+        stakeholderType: stakeholder?.value || "",
+        stakeholderTypeText: stakeholder ? (stakeholder.value === "Other" ? String(data.get("otherStakeholder") || "").trim() : labelText(stakeholder)) : "",
+        otherStakeholder: String(data.get("otherStakeholder") || "").trim(),
+        expectations: selectedCodes("expectations"),
+        expectationsText: selectedText("expectations"),
+        requirements: selectedCodes("requirements"),
+        requirementsText: selectedText("requirements"),
+        climateActions: selectedCodes("climateActions"),
+        climateActionsText: selectedText("climateActions"),
+        suggestion: String(data.get("suggestion") || "").trim()
+    };
+}
+
+form.addEventListener("change", () => { syncSelectedState(); syncOtherField(); });
+form.addEventListener("submit", async event => {
+    event.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    submitButton.disabled = true;
+    setStatus("กำลังบันทึกข้อมูล...", "");
+    const request = timeoutSignal();
+    try {
+        const response = await fetch(GOOGLE_SCRIPT_URL, { method: "POST", body: JSON.stringify(payload()), signal: request.signal });
+        const result = await response.json();
+        if (!result.success) throw new Error(result.message || "ไม่สามารถบันทึกข้อมูลได้");
+        setStatus(result.message || "บันทึกข้อมูลเรียบร้อยแล้ว", "success");
+        form.reset();
+        syncSelectedState();
+        syncOtherField();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (error) {
+        setStatus(error.name === "AbortError" ? "หมดเวลาการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง" : (error.message || "ไม่สามารถเชื่อมต่อระบบได้ กรุณาลองใหม่อีกครั้ง"), "error");
+    } finally { request.clear(); submitButton.disabled = false; }
+});
+
+syncSelectedState();
+syncOtherField();

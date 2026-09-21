@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ISO 14001:2026 Environmental Stakeholder Survey</title>
+    <meta name="description" content="แบบสอบถามผู้มีส่วนได้ส่วนเสียด้านระบบการจัดการสิ่งแวดล้อม ISO 14001:2026">
+    <title>แบบสอบถามผู้มีส่วนได้ส่วนเสีย | ISO 14001:2026</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,78 +12,86 @@
         <div class="hero-content">
             <img src="logo-light.png" alt="Behn Meyer Logo" class="logo">
             <div class="hero-text">
-                <h1>แบบฟอร์มระบบการจัดการสิ่งแวดล้อม ISO 14001:2026</h1>
-                <h1>แบบสอบถามความต้องการและความหวังของผู้มีส่วนได้ส่วนเสีย</h1>
+                <p class="eyebrow">Environmental Management System</p>
+                <h1>แบบสอบถามความต้องการและความคาดหวังของผู้มีส่วนได้ส่วนเสีย</h1>
+                <p>ISO 14001:2026 · กลุ่มบริษัทเบ็นไมเยอร์ ประเทศไทย</p>
             </div>
         </div>
     </header>
 
     <main class="container">
-        <section class="card">
-            <h2>วัตถุประสงค์</h2>
-            <p>เพื่อรวบรวมและทบทวนความต้องการ ความคาดหวัง และข้อกำหนดที่เกี่ยวข้องกับการปฏิบัติงานด้านสิ่งแวดล้อมของผู้มีส่วนได้ส่วนเสียภายในและภายนอกองค์กร เพื่อใช้เป็นข้อมูลในการปรับปรุงประสิทธิภาพและความยั่งยืน</p>
-        </section>
-        <section class="card">
-            <h2>ขอบเขต</h2>
-            <p>ใช้สำหรับผู้มีส่วนได้ส่วนเสียภายในและภายนอกที่เกี่ยวข้องกับกิจกรรม กระบวนการ และการดำเนินงานด้านสิ่งแวดล้อมของกลุ่มบริษัทเบ็นไมเยอร์ ประเทศไทย</p>
-        </section>
-        <section class="card">
-            <h2>คำแนะนำ</h2>
-            <p>โปรดทำเครื่องหมายในช่องที่ตรงกับความคิดเห็นของท่าน และระบุรายละเอียดเพิ่มเติมให้ครบถ้วน เพื่อให้ข้อมูลที่ได้รับมีความสมบูรณ์และสามารถนำไปใช้ในการปรับปรุงอย่างต่อเนื่อง</p>
-        </section>
+        <div class="intro-grid">
+            <section class="card intro-card"><h2>วัตถุประสงค์</h2><p>เพื่อรวบรวมและทบทวนความต้องการ ความคาดหวัง และข้อกำหนดด้านสิ่งแวดล้อมของผู้มีส่วนได้ส่วนเสีย เพื่อนำไปปรับปรุงระบบการจัดการสิ่งแวดล้อมอย่างต่อเนื่อง</p></section>
+            <section class="card intro-card"><h2>ขอบเขต</h2><p>ใช้สำหรับผู้มีส่วนได้ส่วนเสียภายในและภายนอกที่เกี่ยวข้องกับกิจกรรม ผลิตภัณฑ์ และบริการของกลุ่มบริษัทเบ็นไมเยอร์ ประเทศไทย</p></section>
+        </div>
+        <section class="card notice"><h2>คำแนะนำ</h2><p>กรุณากรอกข้อมูลที่จำเป็น เลือกคำตอบที่ตรงกับความคิดเห็นของท่าน และกดปุ่ม “ส่งแบบสอบถาม” เมื่อดำเนินการเสร็จแล้ว</p><p class="required-note">ช่องที่มีเครื่องหมาย <strong>*</strong> เป็นข้อมูลที่จำเป็น</p></section>
 
-        <form id="surveyForm">
+        <form id="surveyForm" novalidate>
+            <input type="text" name="website" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
             <section class="card">
                 <h2>ข้อมูลทั่วไป</h2>
-                <div class="form-group"><label for="organization">ชื่อองค์กร / หน่วยงาน *</label><input type="text" id="organization" name="organization" maxlength="200" required></div>
-                <div class="form-group"><label for="contactName">ชื่อผู้ติดต่อ</label><input type="text" id="contactName" name="contactName" maxlength="200"></div>
+                <div class="form-group"><label for="organization">ชื่อองค์กร / หน่วยงาน <span class="required">*</span></label><input type="text" id="organization" name="organization" maxlength="200" required autocomplete="organization"></div>
+                <div class="form-group"><label for="contactName">ชื่อผู้ติดต่อ</label><input type="text" id="contactName" name="contactName" maxlength="200" autocomplete="name"></div>
                 <div class="form-group"><label for="surveyDate">วันที่ตอบแบบสอบถาม</label><input type="date" id="surveyDate" name="surveyDate"></div>
             </section>
 
             <section class="card">
-                <h2>ส่วนที่ 1 : ประเภทผู้มีส่วนได้ส่วนเสีย (เลือกเพียงหนึ่งข้อ)</h2>
+                <h2>ส่วนที่ 1 : ประเภทผู้มีส่วนได้ส่วนเสีย <span class="subheading">(เลือกเพียงหนึ่งข้อ)</span></h2>
                 <label class="option-item"><input type="radio" name="stakeholderType" value="Customer" required><span>ลูกค้า / ผู้รับบริการ</span></label>
-                <label class="option-item"><input type="radio" name="stakeholderType" value="Supplier"><span>ผู้ส่งมอบ / ผู้รับเหมา / ผู้ให้บริการภายนอก</span></label>
-                <label class="option-item"><input type="radio" name="stakeholderType" value="Government"><span>หน่วยงานกำกับดูแล / หน่วยงานราชการ / องค์กรปกครองส่วนท้องถิ่น</span></label>
-                <label class="option-item other-option"><input type="radio" name="stakeholderType" value="Other" id="otherStakeholderOption"><input type="text" id="otherStakeholder" name="otherStakeholder" placeholder="Other" aria-label="ระบุประเภทผู้มีส่วนได้ส่วนเสียอื่นๆ"></label>
+                <label class="option-item"><input type="radio" name="stakeholderType" value="Supplier"><span>ผู้ส่งมอบ / ผู้รับเหมา / ผู้ให้บริการ</span></label>
+                <label class="option-item"><input type="radio" name="stakeholderType" value="Government"><span>หน่วยงานกำกับดูแล / หน่วยงานราชการ</span></label>
+                <label class="option-item"><input type="radio" name="stakeholderType" value="Other" id="otherStakeholderOption"><span>อื่น ๆ</span><input type="text" id="otherStakeholder" name="otherStakeholder" maxlength="100" placeholder="โปรดระบุ" disabled></label>
             </section>
 
             <section class="card">
-                <h2>ส่วนที่ 2 : ประเด็นความคาดหวังด้านสิ่งแวดล้อมที่มีความสำคัญต่อองค์กร</h2>
-                <h3>ท่านมีความคาดหวังจากกลุ่มบริษัทเบ็นไมเยอร์ ประเทศไทย ด้านสิ่งแวดล้อมต่อไปนี้หรือไม่</h3>
+                <h2>ส่วนที่ 2 : ความคาดหวังด้านสิ่งแวดล้อม <span class="subheading">(เลือกได้หลายข้อ)</span></h2>
+                <h3>ท่านมีความคาดหวังจากกลุ่มบริษัทเบ็นไมเยอร์ ประเทศไทย ด้านสิ่งแวดล้อมในเรื่องใดบ้าง</h3>
                 <label class="check-item"><input type="checkbox" name="expectations" value="Energy"><span>การใช้พลังงานอย่างมีประสิทธิภาพ</span></label>
-                <label class="check-item"><input type="checkbox" name="expectations" value="GHG"><span>การปล่อยก๊าซเรือนกระจก การเปลี่ยนแปลงสภาพภูมิอากาศ</span></label>
-                <label class="check-item"><input type="checkbox" name="expectations" value="Waste"><span>การลดของเสีย การใช้ซ้ำ การรีไซเคิล</span></label>
-                <label class="check-item"><input type="checkbox" name="expectations" value="Chemical"><span>การจัดการสารเคมี วัตถุอันตราย และความปลอดภัย</span></label>
-                <label class="check-item"><input type="checkbox" name="expectations" value="Water"><span>การอนุรักษ์น้ำ การใช้น้ำอย่างมีประสิทธิภาพ</span></label>
-                <label class="check-item"><input type="checkbox" name="expectations" value="Procurement"><span>การจัดซื้อจัดจ้างอย่างยั่งยืนและรับผิดชอบต่อสิ่งแวดล้อม</span></label>
-                <label class="check-item"><input type="checkbox" name="expectations" value="Air"><span>คุณภาพอากาศ เสียง กลิ่น ฝุ่น และสิ่งแวดล้อมเชิงพื้นที่</span></label>
-                <label class="check-item"><input type="checkbox" name="expectations" value="Biodiversity"><span>การคุ้มครองความหลากหลายทางชีวภาพและระบบนิเวศ</span></label>
-                <label class="check-item"><input type="checkbox" name="expectations" value="Natural"><span>ความพร้อมของทรัพยากรธรรมชาติ และการจัดการอย่างยั่งยืน</span></label>
-                <label class="check-item"><input type="checkbox" name="expectations" value="Pollution"><span>ความเสี่ยงจากมลพิษสะสมหรือระดับสูงต่อสุขภาพและสิ่งแวดล้อม</span></label>
-                <label class="check-item"><input type="checkbox" name="expectations" value="Control"><span>คาดหวังให้องค์กรควบคุมหรือสื่อสารเพื่อบรรลุเป้าหมายสิ่งแวดล้อม</span></label>
+                <label class="check-item"><input type="checkbox" name="expectations" value="GHG"><span>การปล่อยก๊าซเรือนกระจกและการเปลี่ยนแปลงสภาพภูมิอากาศ</span></label>
+                <label class="check-item"><input type="checkbox" name="expectations" value="Waste"><span>การลดของเสีย การใช้ซ้ำ และการรีไซเคิล</span></label>
+                <label class="check-item"><input type="checkbox" name="expectations" value="Chemical"><span>การจัดการสารเคมี วัตถุอันตราย และการป้องกันการรั่วไหล</span></label>
+                <label class="check-item"><input type="checkbox" name="expectations" value="Water"><span>การอนุรักษ์น้ำและการใช้น้ำอย่างมีประสิทธิภาพ</span></label>
+                <label class="check-item"><input type="checkbox" name="expectations" value="Procurement"><span>การจัดซื้อจัดจ้างอย่างยั่งยืน</span></label>
+                <label class="check-item"><input type="checkbox" name="expectations" value="Air"><span>คุณภาพอากาศ เสียง กลิ่น ฝุ่น และสิ่งรบกวน</span></label>
+                <label class="check-item"><input type="checkbox" name="expectations" value="Biodiversity"><span>การคุ้มครองความหลากหลายทางชีวภาพ</span></label>
+                <label class="check-item"><input type="checkbox" name="expectations" value="Natural"><span>ความพร้อมของทรัพยากรธรรมชาติและวัตถุดิบ</span></label>
+                <label class="check-item"><input type="checkbox" name="expectations" value="Pollution"><span>ความเสี่ยงจากมลพิษสะสมหรือระดับมลพิษ</span></label>
+                <label class="check-item"><input type="checkbox" name="expectations" value="Control"><span>การควบคุมและการสื่อสารผลการดำเนินงานด้านสิ่งแวดล้อม</span></label>
             </section>
 
             <section class="card">
-                <h2>ส่วนที่ 3 : ประเด็นความต้องการด้านสิ่งแวดล้อมที่มีความสำคัญต่อองค์กร</h2>
-                <h3>ท่านมีความต้องการจากกลุ่มบริษัทเบ็นไมเยอร์ ประเทศไทย ด้านสิ่งแวดล้อมดังต่อไปนี้หรือไม่</h3>
-                <label class="check-item"><input type="checkbox" name="requirements" value="ISO14001"><span>ต้องการให้คงไว้ซึ่งการรับรอง ISO 14001 อย่างต่อเนื่อง</span></label>
-                <label class="check-item"><input type="checkbox" name="requirements" value="EnergyPolicy"><span>มีแนวทางใช้พลังงานอย่างมีประสิทธิภาพและยั่งยืน</span></label>
-                <label class="check-item"><input type="checkbox" name="requirements" value="CarbonReduction"><span>มีผลรายงานการปล่อยก๊าซเรือนกระจกและเป้าหมายลดการปล่อย</span></label>
+                <h2>ส่วนที่ 3 : ความต้องการด้านสิ่งแวดล้อม <span class="subheading">(เลือกได้หลายข้อ)</span></h2>
+                <h3>ท่านมีความต้องการจากกลุ่มบริษัทเบ็นไมเยอร์ ประเทศไทย ด้านสิ่งแวดล้อมในเรื่องใดบ้าง</h3>
+                <label class="check-item"><input type="checkbox" name="requirements" value="ISO14001"><span>ต้องการให้คงไว้ซึ่งการรับรอง ISO 14001</span></label>
+                <label class="check-item"><input type="checkbox" name="requirements" value="EnergyPolicy"><span>มีแนวทางใช้พลังงานอย่างมีประสิทธิภาพ</span></label>
+                <label class="check-item"><input type="checkbox" name="requirements" value="CarbonReduction"><span>มีผลรายงานการปล่อยก๊าซเรือนกระจกและการลดคาร์บอน</span></label>
                 <label class="check-item"><input type="checkbox" name="requirements" value="WasteReduction"><span>มีเป้าหมายการลดของเสีย การใช้ซ้ำ และการรีไซเคิล</span></label>
-                <label class="check-item"><input type="checkbox" name="requirements" value="ChemicalControl"><span>มีแนวทางการจัดการสารเคมี วัตถุอันตราย และความปลอดภัย</span></label>
-                <label class="check-item"><input type="checkbox" name="requirements" value="WaterManagement"><span>มีแนวทางการอนุรักษ์น้ำ การใช้น้ำอย่างมีประสิทธิภาพ</span></label>
-                <label class="check-item"><input type="checkbox" name="requirements" value="PollutionControl"><span>มีแนวทางการควบคุมมลพิษทางอากาศ น้ำ ดิน และเสียง</span></label>
-                <label class="check-item"><input type="checkbox" name="requirements" value="BiodiversityProtection"><span>มีการสื่อสารและให้การคุ้มครองความหลากหลายทางชีวภาพอย่างชัดเจน</span></label>
+                <label class="check-item"><input type="checkbox" name="requirements" value="ChemicalControl"><span>มีแนวทางการจัดการสารเคมีและวัตถุอันตราย</span></label>
+                <label class="check-item"><input type="checkbox" name="requirements" value="WaterManagement"><span>มีแนวทางการอนุรักษ์น้ำและการใช้น้ำอย่างมีประสิทธิภาพ</span></label>
+                <label class="check-item"><input type="checkbox" name="requirements" value="PollutionControl"><span>มีแนวทางการควบคุมมลพิษทางอากาศ น้ำ เสียง และดิน</span></label>
+                <label class="check-item"><input type="checkbox" name="requirements" value="BiodiversityProtection"><span>มีการสื่อสารและให้การคุ้มครองความหลากหลายทางชีวภาพ</span></label>
             </section>
 
-            <section class="card"><h2>ส่วนที่ 4 : ข้อเสนอแนะและการปรับปรุงอย่างต่อเนื่อง</h2><h3>ท่านมีข้อเสนอแนะเกี่ยวกับมาตรการ กิจกรรม หรือการสื่อสารใดที่ควรปรับปรุงเพิ่มเติมหรือไม่</h3><textarea id="suggestion" name="suggestion" placeholder="กรุณาระบุข้อเสนอแนะเพิ่มเติม" maxlength="5000"></textarea></section>
-            <div class="submit-container"><button type="submit" class="btn-submit">ส่งแบบสอบถาม</button></div>
+            <section class="card">
+                <h2>ส่วนที่ 4 : การเปลี่ยนแปลงสภาพภูมิอากาศ <span class="subheading">(เลือกได้หลายข้อ)</span></h2>
+                <h3>ในฐานะผู้มีส่วนได้ส่วนเสีย องค์กรของท่านมีการดำเนินงานใดต่อสิ่งแวดล้อม</h3>
+                <label class="check-item"><input type="checkbox" name="climateActions" value="GHGReporting"><span>ประเมินและรายงานก๊าซเรือนกระจก</span></label>
+                <label class="check-item"><input type="checkbox" name="climateActions" value="ISO14001GreenIndustry"><span>ได้รับมาตรฐาน ISO 14001 และการรับรองอุตสาหกรรมสีเขียวระดับ 3</span></label>
+                <label class="check-item"><input type="checkbox" name="climateActions" value="CleanEnergy"><span>มีการใช้พลังงานทดแทน / พลังงานสะอาด</span></label>
+                <label class="check-item"><input type="checkbox" name="climateActions" value="CarbonNeutralNetZero"><span>กำหนดเป้าหมาย Carbon Neutrality หรือ Net Zero</span></label>
+                <label class="check-item"><input type="checkbox" name="climateActions" value="GreenProcurement"><span>Green Procurement (การจัดซื้อจัดจ้างสีเขียว)</span></label>
+            </section>
+
+            <section class="card">
+                <h2>ส่วนที่ 5 : ข้อเสนอแนะและการปรับปรุงอย่างต่อเนื่อง</h2>
+                <h3>โปรดระบุข้อเสนอแนะ ความคิดเห็น หรือประเด็นด้านสิ่งแวดล้อมอื่น ๆ ที่ต้องการให้กลุ่มบริษัทพิจารณา</h3>
+                <textarea id="suggestion" name="suggestion" maxlength="5000" placeholder="ระบุข้อเสนอแนะของท่าน (ถ้ามี)"></textarea>
+            </section>
+
+            <div class="submit-container"><button type="submit" class="btn-submit">ส่งแบบสอบถาม</button><p id="formStatus" class="form-status" role="status" aria-live="polite"></p></div>
         </form>
     </main>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.topology.min.js"></script>
+    <footer>ISO 14001:2026 · Environmental Stakeholder Survey</footer>
     <script src="script.js"></script>
 </body>
 </html>
