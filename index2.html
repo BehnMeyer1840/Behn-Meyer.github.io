@@ -1,1 +1,46 @@
-
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ส่งแบบสอบถามเรียบร้อยแล้ว</title>
+    <style>
+        :root { font-family: "Segoe UI", Tahoma, sans-serif; }
+        * { box-sizing: border-box; }
+        body {
+            min-height: 100vh; margin: 0; padding: 24px;
+            display: grid; place-items: center;
+            background: linear-gradient(135deg, #edf7f2, #dcefeb);
+            color: #123b35;
+        }
+        .success-card {
+            width: min(100%, 560px); padding: 48px 32px; text-align: center;
+            background: rgba(255,255,255,.96); border-radius: 24px;
+            box-shadow: 0 18px 45px rgba(18,59,53,.16);
+            animation: appear .5s ease-out both;
+        }
+        .checkmark {
+            width: 82px; height: 82px; margin: 0 auto 24px;
+            display: grid; place-items: center; border-radius: 50%;
+            background: #1f6b4f; color: white; font-size: 48px; line-height: 1;
+        }
+        h1 { margin: 0 0 14px; font-size: clamp(1.7rem, 5vw, 2.4rem); }
+        p { margin: 0; color: #55716b; font-size: 1.08rem; line-height: 1.7; }
+        .back-link {
+            display: inline-block; margin-top: 30px; padding: 12px 24px;
+            border-radius: 999px; background: #0c4038; color: white;
+            text-decoration: none; transition: transform .2s, background .2s;
+        }
+        .back-link:hover { transform: translateY(-2px); background: #1f6b4f; }
+        @keyframes appear { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <main class="success-card" aria-live="polite">
+        <div class="checkmark" aria-hidden="true">✓</div>
+        <h1>ส่งแบบสอบถามเรียบร้อยแล้ว</h1>
+        <p>ขอบคุณสำหรับข้อมูลและความคิดเห็นของท่าน<br>ระบบบันทึกข้อมูลของท่านเรียบร้อยแล้ว</p>
+        <a class="back-link" href="index.html">กลับไปหน้าแบบสอบถาม</a>
+    </main>
+</body>
+</html>
