@@ -10,6 +10,7 @@ const otherInput = document.getElementById("otherStakeholder");
 if (!form) throw new Error("ไม่พบแบบฟอร์ม surveyForm");
 
 function selectedInputs(name) { return [...form.querySelectorAll(`input[name="${name}"]:checked`)]; }
+function selectedCodes(name) { return selectedInputs(name).map(input => input.value).join(";"); }
 function labelText(input) {
     const label = input.closest("label");
     if (!label) return input.value;
@@ -39,21 +40,28 @@ function timeoutSignal() {
 function payload() {
     const data = new FormData(form);
     const stakeholder = form.querySelector('input[name="stakeholderType"]:checked');
+    const stakeholderText = stakeholder
+        ? (stakeholder.value === "Other" ? String(data.get("otherStakeholder") || "").trim() : labelText(stakeholder))
+        : "";
+
     return {
         submissionId: submissionId(),
         website: String(data.get("website") || ""),
         organization: String(data.get("organization") || "").trim(),
         contactName: String(data.get("contactName") || "").trim(),
         surveyDate: String(data.get("surveyDate") || ""),
-        // ส่งข้อความที่แสดงในแบบฟอร์มแทนค่า value เช่น Customer หรือ Energy
-        stakeholderType: stakeholder ? (stakeholder.value === "Other" ? String(data.get("otherStakeholder") || "").trim() : labelText(stakeholder)) : "",
-        stakeholderTypeText: stakeholder ? (stakeholder.value === "Other" ? String(data.get("otherStakeholder") || "").trim() : labelText(stakeholder)) : "",
+
+        // เก็บชื่อฟิลด์เดิมไว้เพื่อให้ Google Apps Script เดิมบันทึกได้
+        stakeholderType: stakeholder?.value || "",
+        expectations: selectedCodes("expectations"),
+        requirements: selectedCodes("requirements"),
+        climateActions: selectedCodes("climateActions"),
+
+        // ฟิลด์ข้อความภาษาไทยสำหรับให้ Google Apps Script นำไปบันทึกลงชีต
+        stakeholderTypeText: stakeholderText,
         otherStakeholder: String(data.get("otherStakeholder") || "").trim(),
-        expectations: selectedText("expectations"),
         expectationsText: selectedText("expectations"),
-        requirements: selectedText("requirements"),
         requirementsText: selectedText("requirements"),
-        climateActions: selectedText("climateActions"),
         climateActionsText: selectedText("climateActions"),
         suggestion: String(data.get("suggestion") || "").trim()
     };
@@ -67,7 +75,11 @@ form.addEventListener("submit", async event => {
     setStatus("กำลังบันทึกข้อมูล...", "");
     const request = timeoutSignal();
     try {
-        const response = await fetch(GOOGLE_SCRIPT_URL, { method: "POST", body: JSON.stringify(payload()), signal: request.signal });
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: "POST",
+            body: JSON.stringify(payload()),
+            signal: request.signal
+        });
         const result = await response.json();
         if (!result.success) throw new Error(result.message || "ไม่สามารถบันทึกข้อมูลได้");
         setStatus(result.message || "บันทึกข้อมูลเรียบร้อยแล้ว", "success");
@@ -76,8 +88,16 @@ form.addEventListener("submit", async event => {
         syncOtherField();
         window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
-        setStatus(error.name === "AbortError" ? "หมดเวลาการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง" : (error.message || "ไม่สามารถส่งข้อมูลได้"), "error");
-    } finally { request.clear(); submitButton.disabled = false; }
+        setStatus(
+            error.name === "AbortError"
+                ? "หมดเวลาการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง"
+                : (error.message || "ไม่สามารถส่งข้อมูลได้"),
+            "error"
+        );
+    } finally {
+        request.clear();
+        submitButton.disabled = false;
+    }
 });
 
 syncSelectedState();
