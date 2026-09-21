@@ -1,4 +1,4 @@
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyGFBOOs3fgcxSAW6EhXJjiHpR1nakMiZ0R69B3sG_7RVA8BViWNlC266sqQv0QORRH/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyWgy1aZbryhZTVF1M-y5YJv-rfRPJR2VUYfhdVSKapbW9BhbwlHMPR-OkujnPbEcHI/exec";
 //const GOOGLE_SCRIPT_URL = "__GOOGLE_FORM_URL__";
 
 const REQUEST_TIMEOUT_MS = 15000;
@@ -84,6 +84,9 @@ form.addEventListener("submit", async event => {
         const result = await response.json();
         if (!result.success) throw new Error(result.message || "ไม่สามารถบันทึกข้อมูลได้");
         setStatus(result.message || "บันทึกข้อมูลเรียบร้อยแล้ว", "success");
+
+        window.location.href = "index2.html";
+
         form.reset();
         syncSelectedState();
         syncOtherField();
