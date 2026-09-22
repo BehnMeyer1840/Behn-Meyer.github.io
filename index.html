@@ -80,23 +80,23 @@
                 <label class="check-item"><input type="checkbox" name="climateActions" value="CleanEnergy"><span>มีการใช้พลังงานทดแทน / พลังงานสะอาด</span></label>
                 <label class="check-item"><input type="checkbox" name="climateActions" value="CarbonNeutralNetZero"><span>กำหนดเป้าหมาย Carbon Neutrality หรือ Net Zero</span></label>
                 <label class="check-item"><input type="checkbox" name="climateActions" value="GreenProcurement"><span>Green Procurement (การจัดซื้อจัดจ้างสีเขียว)</span></label>
-                <div class="other-option">
+                    <!-- ตัวเลือกอื่น ๆ พร้อมช่องกรอกข้อความ -->
+                <div class="other-climate-option">
                     <label class="check-item" for="otherClimateActionCheckbox">
-                        <input
-                            type="checkbox"
-                            id="otherClimateActionCheckbox"
-                            name="climateActions"
-                            value="Other">
-                    <span>อื่น ๆ</span>
-                    </label>
+                    <input
+                        type="checkbox"
+                        id="otherClimateActionCheckbox"
+                        name="climateActions"
+                        value="Other">
+                    <span>อื่น ๆ</span></label>
                     <input
                         type="text"
                         id="otherClimateAction"
                         name="climateActionsOther"
                         maxlength="500"
-                        placeholder="โปรดระบุรายละเอียด"
-                        aria-label="รายละเอียดอื่น ๆ">
-                </div>
+                        placeholder="โปรดระบุการดำเนินงานด้านสิ่งแวดล้อมอื่น ๆ"
+                        disabled>
+                </div>   
             </section>
 
             <section class="card">
