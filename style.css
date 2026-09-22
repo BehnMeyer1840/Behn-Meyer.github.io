@@ -331,3 +331,17 @@ footer {
         transition-duration: 0.01ms !important;
     }
 }
+.other-climate-option {
+    margin-top: 10px;
+}
+
+.other-climate-option > input[type="text"] {
+    width: calc(100% - 30px);
+    margin: 0 0 8px 30px;
+}
+
+.other-climate-option > input[type="text"]:disabled {
+    background: #eef1f3;
+    color: #8a969d;
+    cursor: not-allowed;
+}
