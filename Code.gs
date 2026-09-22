@@ -4,11 +4,12 @@ const MAX_BODY_LENGTH = 20000;
 const MAX_ORGANIZATION_LENGTH = 200;
 const MAX_CONTACT_NAME_LENGTH = 200;
 const MAX_OTHER_STAKEHOLDER_LENGTH = 100;
+const MAX_OTHER_CLIMATE_ACTION_LENGTH = 500;
 const MAX_SUGGESTION_LENGTH = 5000;
 const ALLOWED_STAKEHOLDER_TYPES = ["Customer", "Supplier", "Government", "Other"];
 const ALLOWED_EXPECTATIONS = ["Energy", "GHG", "Waste", "Chemical", "Water", "Procurement", "Air", "Biodiversity", "Natural", "Pollution", "Control"];
 const ALLOWED_REQUIREMENTS = ["ISO14001", "EnergyPolicy", "CarbonReduction", "WasteReduction", "ChemicalControl", "WaterManagement", "PollutionControl", "BiodiversityProtection"];
-const ALLOWED_CLIMATE_ACTIONS = ["GHGReporting", "ISO14001GreenIndustry", "CleanEnergy", "CarbonNeutralNetZero", "GreenProcurement"];
+const ALLOWED_CLIMATE_ACTIONS = ["GHGReporting", "ISO14001GreenIndustry", "CleanEnergy", "CarbonNeutralNetZero", "GreenProcurement", "Other"];
 
 const STAKEHOLDER_TEXT = {
   Customer: "ลูกค้า / ผู้รับบริการ",
@@ -62,6 +63,7 @@ function doPost(e) {
     const surveyDate = cleanText(data.surveyDate, 20);
     const stakeholderType = cleanText(data.stakeholderType, 50);
     const otherStakeholder = cleanText(data.otherStakeholder, MAX_OTHER_STAKEHOLDER_LENGTH);
+    const climateActionsOther = cleanText(data.climateActionsOther,MAX_OTHER_CLIMATE_ACTION_LENGTH);
     const expectations = validateList(data.expectations, ALLOWED_EXPECTATIONS, "ข้อมูลความคาดหวังไม่ถูกต้อง");
     const requirements = validateList(data.requirements, ALLOWED_REQUIREMENTS, "ข้อมูลความต้องการไม่ถูกต้อง");
     const climateActions = validateList(data.climateActions, ALLOWED_CLIMATE_ACTIONS, "ข้อมูลการดำเนินงานด้านสภาพภูมิอากาศไม่ถูกต้อง");
@@ -69,8 +71,21 @@ function doPost(e) {
 
     if (!organization) return createResponse(false, "กรุณาระบุชื่อองค์กรหรือหน่วยงาน");
     if (!ALLOWED_STAKEHOLDER_TYPES.includes(stakeholderType)) return createResponse(false, "ประเภทผู้มีส่วนได้ส่วนเสียไม่ถูกต้อง");
-    if (stakeholderType === "Other" && !otherStakeholder) return createResponse(false, "กรุณาระบุประเภทผู้มีส่วนได้ส่วนเสีย");
-    if (surveyDate && !isValidDate(surveyDate)) return createResponse(false, "รูปแบบวันที่ไม่ถูกต้อง");
+    // if (stakeholderType === "Other" && !otherStakeholder) return createResponse(false, "กรุณาระบุประเภทผู้มีส่วนได้ส่วนเสีย");
+    // if (surveyDate && !isValidDate(surveyDate)) return createResponse(false, "รูปแบบวันที่ไม่ถูกต้อง");
+    //เพิ่ม
+    if(
+      climateActions.includes("Other") &&
+      !climateActionsOther
+      ) {
+        return createResponse(
+        false,
+        "กรุณาระบุรายละเอียดการดำเนินงานด้านสภาพภูมิอากาศในหัวข้ออื่น ๆ"
+        );
+      }
+    if (surveyDate && !isValidDate(surveyDate)) {
+        return createResponse(false, "รูปแบบวันที่ไม่ถูกต้อง");
+    }
 
     const submissionId = cleanText(data.submissionId, 100);
     const cache = CacheService.getScriptCache();
@@ -84,9 +99,16 @@ function doPost(e) {
     if (!sheet) throw new Error(`ไม่พบ Sheet ชื่อ ${SHEET_NAME}`);
 
     const stakeholderText = stakeholderType === "Other" ? otherStakeholder : (STAKEHOLDER_TEXT[stakeholderType] || stakeholderType);
-    const expectationsText = expectations.map(code => EXPECTATION_TEXT[code] || code).join("; ");
-    const requirementsText = requirements.map(code => REQUIREMENT_TEXT[code] || code).join("; ");
-    const climateText = climateActions.map(code => CLIMATE_ACTION_TEXT[code] || code).join("; ");
+    const expectationsText = expectations.map(code => EXPECTATION_TEXT[code] || code).join("| ");
+    const requirementsText = requirements.map(code => REQUIREMENT_TEXT[code] || code).join("| ");
+    const climateTextParts = climateActions
+          .filter(code => code !== "Other")
+          .map(code => CLIMATE_ACTION_TEXT[code] || code);
+    if (climateActionsOther) {
+        climateTextParts.push(climateActionsOther);
+    }
+
+const climateText = climateTextParts.join(" | ");
 
     const lock = LockService.getScriptLock();
     lock.waitLock(10000);
