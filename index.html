@@ -37,9 +37,9 @@
 
             <section class="card">
                 <h2>ส่วนที่ 1 : ประเภทผู้มีส่วนได้ส่วนเสีย <span class="subheading">(เลือกเพียงหนึ่งข้อ)</span></h2>
-                <label class="option-item"><input type="radio" name="stakeholderType" value="Customer" required><span>ลูกค้า / ผู้รับบริการ</span></label>
-                <label class="option-item"><input type="radio" name="stakeholderType" value="Supplier"><span>ผู้ส่งมอบ / ผู้รับเหมา / ผู้ให้บริการภายนอก</span></label>
-                <label class="option-item"><input type="radio" name="stakeholderType" value="Government"><span>หน่วยงานกำกับดูแล / หน่วยงานราชการ / องค์กรปกครองส่วนท้องถิ่น</span></label>
+                <label class="option-item"><input type="radio" name="stakeholderType" value="Customer" required><span>ลูกค้า</span></label>
+                <label class="option-item"><input type="radio" name="stakeholderType" value="Supplier"><span>คู่ค้า / ผู้ส่งมอบ / ผู้รับเหมา / ผู้ให้บริการภายนอก</span></label>
+                <label class="option-item"><input type="radio" name="stakeholderType" value="Government"><span>หน่วยงานราชการ / การนิคมอุตสาหกรรม</span></label>
                 <label class="option-item"><input type="radio" name="stakeholderType" value="Other" id="otherStakeholderOption"><span>อื่นๆ</span><input type="text" id="otherStakeholder" name="otherStakeholder" maxlength="100" placeholder="โปรดระบุ" disabled></label>
             </section>
 
@@ -80,11 +80,28 @@
                 <label class="check-item"><input type="checkbox" name="climateActions" value="CleanEnergy"><span>มีการใช้พลังงานทดแทน / พลังงานสะอาด</span></label>
                 <label class="check-item"><input type="checkbox" name="climateActions" value="CarbonNeutralNetZero"><span>กำหนดเป้าหมาย Carbon Neutrality หรือ Net Zero</span></label>
                 <label class="check-item"><input type="checkbox" name="climateActions" value="GreenProcurement"><span>Green Procurement (การจัดซื้อจัดจ้างสีเขียว)</span></label>
+                <div class="other-option">
+                    <label class="check-item" for="otherClimateActionCheckbox">
+                        <input
+                            type="checkbox"
+                            id="otherClimateActionCheckbox"
+                            name="climateActions"
+                            value="Other">
+                    <span>อื่น ๆ</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="otherClimateAction"
+                        name="climateActionsOther"
+                        maxlength="500"
+                        placeholder="โปรดระบุรายละเอียด"
+                        aria-label="รายละเอียดอื่น ๆ">
+                </div>
             </section>
 
             <section class="card">
                 <h2>ส่วนที่ 5 : ข้อเสนอแนะและการปรับปรุงอย่างต่อเนื่อง</h2>
-                <h3>โปรดระบุข้อเสนอแนะ ความคิดเห็น หรือประเด็นด้านสิ่งแวดล้อมอื่น ๆ ที่ต้องการให้กลุ่มบริษัทพิจารณา</h3>
+                <h3>โปรดระบุข้อเสนอแนะ ความคิดเห็น หรือประเด็นด้านสิ่งแวดล้อมอื่น ๆ ที่ต้องการให้กลุ่มบริษัทเบ็นไมเยอร์ ประเทศไทย พิจารณา</h3>
                 <textarea id="suggestion" name="suggestion" maxlength="5000" placeholder="ระบุข้อเสนอแนะของท่าน (ถ้ามี)"></textarea>
             </section>
 
