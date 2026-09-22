@@ -8,6 +8,14 @@ const submitButton = form?.querySelector(".btn-submit");
 const otherRadio = document.getElementById("otherStakeholderOption");
 const otherInput = document.getElementById("otherStakeholder");
 
+//เพิ่มมาใหม่
+const otherClimateActionCheckbox = document.getElementById(
+    "otherClimateActionCheckbox"
+);
+const otherClimateActionInput = document.getElementById(
+    "otherClimateAction"
+);
+
 if (!form) throw new Error("ไม่พบแบบฟอร์ม surveyForm");
 
 function selectedInputs(name) { return [...form.querySelectorAll(`input[name="${name}"]:checked`)]; }
@@ -20,17 +28,65 @@ function labelText(input) {
     return clone.textContent.replace(/\s+/g, " ").trim();
 }
 function selectedText(name) { return selectedInputs(name).map(labelText).filter(Boolean).join("; "); }
+//เพิ่มมาใหม่
+function selectedClimateActionsText(data) {
+    const selectedOptions = selectedInputs("climateActions")
+        // ไม่เอา checkbox ที่มี value เป็น Other
+        .filter(input => input.value !== "Other")
+        .map(labelText)
+        .filter(Boolean);
+
+    const otherText = String(
+        data.get("climateActionsOther") || ""
+    ).trim();
+
+    // ถ้ามีข้อความจาก "อื่น ๆ" ให้เพิ่มต่อท้าย
+    if (otherText) {
+        selectedOptions.push(otherText);
+    }
+
+    // คั่นแต่ละรายการด้วย |
+    return selectedOptions.join(" | ");
+}
 function submissionId() { return crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`; }
 function syncSelectedState() {
     form.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => {
         input.closest(".option-item, .check-item")?.classList.toggle("is-selected", input.checked);
     });
 }
+// function syncOtherField() {
+//     const active = Boolean(otherRadio?.checked);
+//     otherInput.disabled = !active;
+//     otherInput.required = active;
+//     if (!active) otherInput.value = "";
+// }
+//เพิ่มมาใหม่
 function syncOtherField() {
-    const active = Boolean(otherRadio?.checked);
-    otherInput.disabled = !active;
-    otherInput.required = active;
-    if (!active) otherInput.value = "";
+    // ส่วนประเภทผู้มีส่วนได้ส่วนเสีย
+    const stakeholderActive = Boolean(otherRadio?.checked);
+
+    if (otherInput) {
+        otherInput.disabled = !stakeholderActive;
+        otherInput.required = stakeholderActive;
+
+        if (!stakeholderActive) {
+            otherInput.value = "";
+        }
+    }
+
+    // ส่วนการเปลี่ยนแปลงสภาพภูมิอากาศ
+    const climateActionActive = Boolean(
+        otherClimateActionCheckbox?.checked
+    );
+
+    if (otherClimateActionInput) {
+        otherClimateActionInput.disabled = !climateActionActive;
+        otherClimateActionInput.required = climateActionActive;
+
+        if (!climateActionActive) {
+            otherClimateActionInput.value = "";
+        }
+    }
 }
 function setStatus(message, type = "") { status.textContent = message; status.className = `form-status ${type}`; }
 function timeoutSignal() {
@@ -56,14 +112,15 @@ function payload() {
         stakeholderType: stakeholder?.value || "",
         expectations: selectedCodes("expectations"),
         requirements: selectedCodes("requirements"),
-        climateActions: selectedCodes("climateActions"),
+        climateActions: selectedCodes("climateActions"),//เหมือนเดิม
 
         // ฟิลด์ข้อความภาษาไทยสำหรับให้ Google Apps Script นำไปบันทึกลงชีต
         stakeholderTypeText: stakeholderText,
         otherStakeholder: String(data.get("otherStakeholder") || "").trim(),
         expectationsText: selectedText("expectations"),
         requirementsText: selectedText("requirements"),
-        climateActionsText: selectedText("climateActions"),
+        // climateActionsText: selectedText("climateActions"),
+        climateActionsText: selectedClimateActionsText(data),//เพิ่มมาใหม่
         suggestion: String(data.get("suggestion") || "").trim()
     };
 }
