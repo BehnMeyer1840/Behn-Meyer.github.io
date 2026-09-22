@@ -1,4 +1,4 @@
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyWgy1aZbryhZTVF1M-y5YJv-rfRPJR2VUYfhdVSKapbW9BhbwlHMPR-OkujnPbEcHI/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzrcxLJ6TTTXbidPe8Pb96Woxbcv3MtksB9M-6txyFRgaWvXU6UdUr2daQgqmbMlRnw/exec";
 //const GOOGLE_SCRIPT_URL = "__GOOGLE_FORM_URL__";
 
 const REQUEST_TIMEOUT_MS = 15000;
