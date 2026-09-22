@@ -5,8 +5,8 @@ const REQUEST_TIMEOUT_MS = 15000;
 const form = document.getElementById("surveyForm");
 const status = document.getElementById("formStatus");
 const submitButton = form?.querySelector(".btn-submit");
-const otherRadio = document.getElementById("otherStakeholderOption");
-const otherInput = document.getElementById("otherStakeholder");
+const otherClimateActionCheckbox = document.getElementById("otherClimateActionCheckbox");
+const otherClimateActionInput  = document.getElementById("otherClimateAction");
 
 //เพิ่มมาใหม่
 const otherClimateActionCheckbox = document.getElementById(
